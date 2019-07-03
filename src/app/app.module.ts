@@ -5,14 +5,16 @@ import { AppComponent } from './app.component';
 
 import { ExampleComponent } from './example.component';
 import { BoardComponent } from './board/board.component';
-import { ProcessElementsComponent } from './board/process-elements/process-elements.component';
+import { EventElementComponent } from './board/event-element/event-element.component';
+import { StartComponent } from './board/start/start.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     ExampleComponent,
     BoardComponent,
-    ProcessElementsComponent
+    EventElementComponent,
+    StartComponent
   ],
   imports: [
     BrowserModule
