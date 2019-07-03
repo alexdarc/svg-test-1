@@ -1,0 +1,9 @@
+svg svg {
+  overflow: visible;
+}
+
+.board {
+  width: 100%;
+  height: calc(100vh - 20px);
+  outline: 1px dashed #ccc;
+}
