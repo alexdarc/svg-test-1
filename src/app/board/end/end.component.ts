@@ -1,9 +1,12 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+
+import { IProcessComponent } from '../../shared/models/process-component.model';
+import { IEndEvent } from 'src/app/shared/models/end-event.model';
 
 @Component({
-  selector: 'svg:svg[app-example]',
+  selector: 'svg:svg[app-end]',
   template: `
-    <svg>
+    <svg [attr.x]="context.x" [attr.y]="context.y">
       <svg:circle [attr.cx]="radius" [attr.cy]="radius" [attr.r]="radius"></svg:circle>
     </svg>
   `,
@@ -16,9 +19,8 @@ import { Component, OnInit, Input } from '@angular/core';
     }
   `],
 })
-export class ExampleComponent implements OnInit {
-  @Input() context: { width: number, height: number };
-
+export class EndComponent implements OnInit, IProcessComponent {
+  context: IEndEvent;
   radius: number;
 
   constructor() { }
