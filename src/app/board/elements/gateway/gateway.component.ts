@@ -1,8 +1,8 @@
 import { Component, OnInit, Input } from '@angular/core';
 
-import { IProcessComponent } from './../../shared/models/process-component.model';
+import { IProcessComponent } from '../../shared/models/process-component.model';
 import { ICoords } from '../../shared/models/coords.model';
-import { IGateway } from 'src/app/shared/models/gateway.model';
+import { IGateway } from 'src/app/board/shared/models/gateway.model';
 
 @Component({
   selector: 'svg:svg[app-gateway]',

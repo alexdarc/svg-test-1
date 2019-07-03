@@ -1,19 +1,19 @@
 import { Component, OnInit, Input, ViewEncapsulation } from '@angular/core';
 
-import { IDatabase } from './../shared/models/database.model';
-import { IFlowElement } from './../shared/models/flow-element.model';
-import { ProcessElement } from './../shared/models/process-element.model';
+import { IDatabase } from './shared/models/database.model';
+import { IFlowElement } from './shared/models/flow-element.model';
+import { ProcessElement } from './shared/models/process-element.model';
 
-import { StartComponent } from './start/start.component';
-import { IStartEvent } from './../shared/models/start-event.model';
-import { GatewayComponent } from './gateway/gateway.component';
-import { IGateway } from '../shared/models/gateway.model';
-import { TaskComponent } from './task/task.component';
-import { ITask } from './../shared/models/task.model';
-import { EndComponent } from './end/end.component';
-import { IEndEvent } from '../shared/models/end-event.model';
-import { SequenceFlowComponent } from './sequence-flow/sequence-flow.component';
-import { ISequenceFlow } from '../shared/models/sequence-flow.model';
+import { StartComponent } from './elements/start/start.component';
+import { IStartEvent } from './shared/models/start-event.model';
+import { GatewayComponent } from './elements/gateway/gateway.component';
+import { IGateway } from './shared/models/gateway.model';
+import { TaskComponent } from './elements/task/task.component';
+import { ITask } from './shared/models/task.model';
+import { EndComponent } from './elements/end/end.component';
+import { IEndEvent } from './shared/models/end-event.model';
+import { SequenceFlowComponent } from './elements/sequence-flow/sequence-flow.component';
+import { ISequenceFlow } from './shared/models/sequence-flow.model';
 
 @Component({
   selector: 'app-board',

@@ -12,8 +12,8 @@ import {
   ComponentFactory,
 } from '@angular/core';
 
-import { ProcessElement } from './../../shared/models/process-element.model';
-import { IProcessComponent } from './../../shared/models/process-component.model';
+import { ProcessElement } from '../shared/models/process-element.model';
+import { IProcessComponent } from '../shared/models/process-component.model';
 
 @Component({
   selector: 'svg:svg[app-event-element]',

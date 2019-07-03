@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 
 import { IProcessComponent } from '../../shared/models/process-component.model';
-import { IEndEvent } from 'src/app/shared/models/end-event.model';
+import { IStartEvent } from 'src/app/board/shared/models/start-event.model';
 
 @Component({
-  selector: 'svg:svg[app-end]',
+  selector: 'svg:svg[app-start]',
   template: `
     <svg [attr.x]="context.x" [attr.y]="context.y">
       <svg:circle [attr.cx]="radius" [attr.cy]="radius" [attr.r]="radius"></svg:circle>
@@ -19,8 +19,8 @@ import { IEndEvent } from 'src/app/shared/models/end-event.model';
     }
   `],
 })
-export class EndComponent implements OnInit, IProcessComponent {
-  context: IEndEvent;
+export class StartComponent implements OnInit, IProcessComponent {
+  context: IStartEvent;
   radius: number;
 
   constructor() { }

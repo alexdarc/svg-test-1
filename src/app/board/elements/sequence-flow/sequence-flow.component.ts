@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
 import { IProcessComponent } from '../../shared/models/process-component.model';
-import { ISequenceFlow } from './../../shared/models/sequence-flow.model';
+import { ISequenceFlow } from '../../shared/models/sequence-flow.model';
 
 @Component({
   selector: 'svg:svg[app-sequence-flow]',

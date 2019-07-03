@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
 
-import { IDatabase } from './../models/database.model';
-import { IFlowElement } from '../models/flow-element.model';
+import { IDatabase } from '../../board/shared/models/database.model';
+import { IFlowElement } from '../../board/shared/models/flow-element.model';
 
 @Injectable({
   providedIn: 'root'
