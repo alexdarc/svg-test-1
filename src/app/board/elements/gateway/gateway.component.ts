@@ -2,7 +2,7 @@ import { Component, OnInit, Input } from '@angular/core';
 
 import { IProcessComponent } from '../../shared/models/process-component.model';
 import { ICoords } from '../../shared/models/coords.model';
-import { IGateway } from 'src/app/board/shared/models/gateway.model';
+import { Gateway } from './gateway.model';
 
 @Component({
   selector: 'svg:svg[app-gateway]',
@@ -22,7 +22,7 @@ import { IGateway } from 'src/app/board/shared/models/gateway.model';
   `],
 })
 export class GatewayComponent implements IProcessComponent, OnInit {
-  context: IGateway;
+  context: Gateway;
 
   top: ICoords;
   right: ICoords;

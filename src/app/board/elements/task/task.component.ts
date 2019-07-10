@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
 import { IProcessComponent } from 'src/app/board/shared/models/process-component.model';
-import { ITask } from 'src/app/board/shared/models/task.model';
+import { Task } from './task.model';
 
 @Component({
   selector: 'svg:svg[app-task]',
@@ -20,7 +20,7 @@ import { ITask } from 'src/app/board/shared/models/task.model';
   `],
 })
 export class TaskComponent implements IProcessComponent, OnInit {
-  context: ITask;
+  context: Task;
 
   constructor() { }
 

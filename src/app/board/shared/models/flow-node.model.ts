@@ -1,10 +1,13 @@
 import { IFlowElement } from './flow-element.model';
 
-export interface IFlowNode extends IFlowElement {
-  incoming: string[];
-  outgoing: string[];
-  x: number;
-  y: number;
-  width: number;
-  height: number;
+export class FlowNode implements IFlowElement {
+  constructor(
+    public id: string,
+    public incoming: string[],
+    public outgoing: string[],
+    public x: number,
+    public y: number,
+    public width: number,
+    public height: number,
+  ) {}
 }

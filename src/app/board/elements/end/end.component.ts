@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
 import { IProcessComponent } from '../../shared/models/process-component.model';
-import { IEndEvent } from 'src/app/board/shared/models/end-event.model';
+import { EndEvent } from './end-event.model';
 
 @Component({
   selector: 'svg:svg[app-end]',
@@ -20,7 +20,7 @@ import { IEndEvent } from 'src/app/board/shared/models/end-event.model';
   `],
 })
 export class EndComponent implements OnInit, IProcessComponent {
-  context: IEndEvent;
+  context: EndEvent;
   radius: number;
 
   constructor() { }

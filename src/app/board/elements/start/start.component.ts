@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
 import { IProcessComponent } from '../../shared/models/process-component.model';
-import { IStartEvent } from 'src/app/board/shared/models/start-event.model';
+import { StartEvent } from './start-event.model';
 
 @Component({
   selector: 'svg:svg[app-start]',
@@ -20,7 +20,7 @@ import { IStartEvent } from 'src/app/board/shared/models/start-event.model';
   `],
 })
 export class StartComponent implements OnInit, IProcessComponent {
-  context: IStartEvent;
+  context: StartEvent;
   radius: number;
 
   constructor() { }

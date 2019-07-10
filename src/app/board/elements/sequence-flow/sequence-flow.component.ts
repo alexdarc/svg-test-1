@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
 import { IProcessComponent } from '../../shared/models/process-component.model';
-import { ISequenceFlow } from '../../shared/models/sequence-flow.model';
+import { SequenceFlow } from './sequence-flow.model';
 
 @Component({
   selector: 'svg:svg[app-sequence-flow]',
@@ -42,7 +42,7 @@ import { ISequenceFlow } from '../../shared/models/sequence-flow.model';
   `],
 })
 export class SequenceFlowComponent implements IProcessComponent, OnInit {
-  context: ISequenceFlow;
+  context: SequenceFlow;
 
   coords: string;
 
