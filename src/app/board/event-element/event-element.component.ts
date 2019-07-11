@@ -40,6 +40,13 @@ export class EventElementComponent implements OnInit, OnDestroy, OnChanges {
 
   private componentRef: ComponentRef<IProcessComponent>;
   private componentInstance: IProcessComponent;
+  private readonly flowToComponent = {
+    StartEvent: StartComponent,
+    EndEvent: EndComponent,
+    Task: TaskComponent,
+    Gateway: GatewayComponent,
+    SequenceFlow: SequenceFlowComponent,
+  };
 
   constructor(private resolver: ComponentFactoryResolver) { }
 
@@ -77,27 +84,7 @@ export class EventElementComponent implements OnInit, OnDestroy, OnChanges {
   }
 
   private getProcessElement(flowElement): ProcessElement | never {
-    let component: { new(): IProcessComponent } = null;
-
-    if (flowElement instanceof StartEvent) {
-      component = StartComponent;
-    }
-
-    if (flowElement instanceof EndEvent) {
-      component = EndComponent;
-    }
-
-    if (flowElement instanceof Task) {
-      component = TaskComponent;
-    }
-
-    if (flowElement instanceof Gateway) {
-      component = GatewayComponent;
-    }
-
-    if (flowElement instanceof SequenceFlow) {
-      component = SequenceFlowComponent;
-    }
+    const component: { new(): IProcessComponent } = this.flowToComponent[flowElement.constructor.name];
 
     if (component) {
       return new ProcessElement(component, flowElement);
