@@ -22,7 +22,7 @@ import { IProcessComponent } from '../shared/models/process-component.model';
 import { IFlowElement } from './../shared/models/flow-element.model';
 import { ProcessElement } from './../shared/models/process-element.model';
 import { StartEvent } from '../elements/start/start-event.model';
-import { EndEvent } from 'src/app/board/elements/end/end-event.model';
+import { EndEvent } from '../elements/end/end-event.model';
 import { Gateway } from './../elements/gateway/gateway.model';
 import { Task } from '../elements/task/task.model';
 import { SequenceFlow } from '../elements/sequence-flow/sequence-flow.model';

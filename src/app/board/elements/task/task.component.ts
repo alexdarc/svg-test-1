@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 
-import { IProcessComponent } from 'src/app/board/shared/models/process-component.model';
+import { IProcessComponent } from '../../shared/models/process-component.model';
 import { Task } from './task.model';
 
 @Component({

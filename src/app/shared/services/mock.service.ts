@@ -4,8 +4,8 @@ import { Observable, of } from 'rxjs';
 import { IDatabase } from '../../board/shared/models/database.model';
 import { IFlowElement } from '../../board/shared/models/flow-element.model';
 import { StartEvent } from './../../board/elements/start/start-event.model';
-import { EndEvent } from 'src/app/board/elements/end/end-event.model';
-import { Task } from 'src/app/board/elements/task/task.model';
+import { EndEvent } from './../../board/elements/end/end-event.model';
+import { Task } from './../../board/elements/task/task.model';
 import { Gateway } from './../../board/elements/gateway/gateway.model';
 import { SequenceFlow } from './../../board/elements/sequence-flow/sequence-flow.model';
 

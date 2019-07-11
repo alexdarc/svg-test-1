@@ -8,9 +8,9 @@ import { IDatabase } from '../../board/shared/models/database.model';
 import { IFlowElement } from '../../board/shared/models/flow-element.model';
 
 import { StartEvent } from './../../board/elements/start/start-event.model';
-import { EndEvent } from 'src/app/board/elements/end/end-event.model';
+import { EndEvent } from './../../board/elements/end/end-event.model';
 import { Gateway } from './../../board/elements/gateway/gateway.model';
-import { Task } from 'src/app/board/elements/task/task.model';
+import { Task } from './../../board/elements/task/task.model';
 
 interface JSONElement {
   $type: string;
