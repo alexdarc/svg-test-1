@@ -20,7 +20,6 @@ import { SequenceFlowComponent } from '../elements/sequence-flow/sequence-flow.c
 
 import { IProcessComponent } from '../shared/models/process-component.model';
 import { IFlowElement } from './../shared/models/flow-element.model';
-import { ProcessElement } from './../shared/models/process-element.model';
 
 @Component({
   selector: 'svg:svg[app-event-element]',
@@ -67,24 +66,16 @@ export class EventElementComponent implements OnInit, OnDestroy, OnChanges {
   private createComponent() {
     this.dynamicContainer.clear();
 
-    const processElement = this.getProcessElement(this.flowElement);
-    if (processElement) {
-      const factory: ComponentFactory<IProcessComponent> = this.resolver.resolveComponentFactory(processElement.component);
+    const component: { new(): IProcessComponent } =
+      this.flowToComponent[this.flowElement.constructor.name];
+
+    if (component) {
+      const factory: ComponentFactory<IProcessComponent> = this.resolver.resolveComponentFactory(component);
       this.componentRef = this.dynamicContainer.createComponent(factory);
       this.componentInstance = this.componentRef.instance;
 
       // Передаем данные в компонент
-      this.componentInstance.context = processElement.context;
+      this.componentInstance.context = this.flowElement;
     }
-  }
-
-  private getProcessElement(flowElement): ProcessElement | never {
-    const component: { new(): IProcessComponent } = this.flowToComponent[flowElement.constructor.name];
-
-    if (component) {
-      return new ProcessElement(component, flowElement);
-    }
-
-    throw new Error('Flow element cannot defined');
   }
 }
