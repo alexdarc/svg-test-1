@@ -48,52 +48,52 @@ export class GistService implements IDatabase {
     const result = jsonElements.map((jsonElement) => {
       switch (jsonElement.$type) {
         case 'tStartEvent':
-          return new StartEvent(
-            jsonElement.id,
-            jsonElement.incoming,
-            jsonElement.outgoing,
-            jsonElement.x,
-            jsonElement.y,
-            jsonElement.width,
-            jsonElement.height
-          );
+          return new StartEvent({
+            id: jsonElement.id,
+            incoming: jsonElement.incoming,
+            outgoing: jsonElement.outgoing,
+            x: jsonElement.x,
+            y: jsonElement.y,
+            width: jsonElement.width,
+            height: jsonElement.height,
+          });
         case 'tEndEvent':
-          return new EndEvent(
-            jsonElement.id,
-            jsonElement.incoming,
-            jsonElement.outgoing,
-            jsonElement.x,
-            jsonElement.y,
-            jsonElement.width,
-            jsonElement.height
-          );
+          return new EndEvent({
+            id: jsonElement.id,
+            incoming: jsonElement.incoming,
+            outgoing: jsonElement.outgoing,
+            x: jsonElement.x,
+            y: jsonElement.y,
+            width: jsonElement.width,
+            height: jsonElement.height,
+          });
         case 'tExclusiveGateway':
-          return new Gateway(
-            jsonElement.id,
-            jsonElement.incoming,
-            jsonElement.outgoing,
-            jsonElement.x,
-            jsonElement.y,
-            jsonElement.width,
-            jsonElement.height
-          );
+          return new Gateway({
+            id: jsonElement.id,
+            incoming: jsonElement.incoming,
+            outgoing: jsonElement.outgoing,
+            x: jsonElement.x,
+            y: jsonElement.y,
+            width: jsonElement.width,
+            height: jsonElement.height,
+          });
         case 'tTask':
-          return new Task(
-            jsonElement.id,
-            jsonElement.incoming,
-            jsonElement.outgoing,
-            jsonElement.x,
-            jsonElement.y,
-            jsonElement.width,
-            jsonElement.height
-          );
+          return new Task({
+            id: jsonElement.id,
+            incoming: jsonElement.incoming,
+            outgoing: jsonElement.outgoing,
+            x: jsonElement.x,
+            y: jsonElement.y,
+            width: jsonElement.width,
+            height: jsonElement.height,
+          });
         case 'tSequenceFlow':
-          return new SequenceFlow(
-            jsonElement.id,
-            jsonElement.sourceRef,
-            jsonElement.targetRef,
-            jsonElement.waypoints
-          );
+          return new SequenceFlow({
+            id: jsonElement.id,
+            sourceRef: jsonElement.sourceRef,
+            targetRef: jsonElement.targetRef,
+            waypoints: jsonElement.waypoints,
+          });
 
         default:
           throw new Error('JSON element cannot recognized');
