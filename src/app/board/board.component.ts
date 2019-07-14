@@ -1,3 +1,4 @@
+import { Task } from './elements/task/task.model';
 import { Component, OnInit, Input, ViewEncapsulation } from '@angular/core';
 
 import { IDatabase } from './shared/models/database.model';
@@ -24,4 +25,17 @@ export class BoardComponent implements OnInit {
       });
   }
 
+  onAdd() {
+    this.flowElements.push(
+      new Task({
+        id: 'task_2',
+        incoming: null,
+        outgoing: null,
+        x: 100,
+        y: 200,
+        width: 100,
+        height: 70,
+      })
+    );
+  }
 }

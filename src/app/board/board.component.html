@@ -1,4 +1,4 @@
-<svg class="board">
+<svg class="board" (click)="onAdd()">
   <svg app-event-element
     *ngFor="let flowElement of flowElements"
     [flowElement]="flowElement"
