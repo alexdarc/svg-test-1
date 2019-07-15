@@ -21,12 +21,12 @@ export class BoardComponent {
 
   constructor() { }
 
-  onAdd() {
+  onAdd(evt: MouseEvent) {
     this.eventBus.emit(
       new CreateTaskCommand(
         'task_2' + Math.random(),
-        200 + Math.random() * 100,
-        300 + Math.random() * 100
+        evt.offsetX,
+        evt.offsetY
       )
     );
   }
