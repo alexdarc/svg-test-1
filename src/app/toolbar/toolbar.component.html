@@ -6,13 +6,22 @@
       role="group"
       aria-label="Базовые элементы"
     >
-      <button class="btn btn-primary toolbar__item toolbar__item--start">StartEvent</button>
+      <button
+        class="btn btn-primary toolbar__item toolbar__item--start"
+        (click)="addStartEvent()"
+      >StartEvent</button>
       <button
         class="btn btn-primary toolbar__item toolbar__item--task"
         (click)="addTask()"
       >Task</button>
-      <button class="btn btn-primary toolbar__item toolbar__item--gateway">Gateway</button>
-      <button class="btn btn-primary toolbar__item toolbar__item--end">EndEvent</button>
+      <button
+        class="btn btn-primary toolbar__item toolbar__item--gateway"
+        (click)="addGateway()"
+      >Gateway</button>
+      <button
+        class="btn btn-primary toolbar__item toolbar__item--end"
+        (click)="addEndEvent()"
+      >EndEvent</button>
     </div>
   </div>
 </div>

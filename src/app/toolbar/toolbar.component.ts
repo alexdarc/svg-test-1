@@ -1,7 +1,10 @@
+import { CreateStartEventCommand } from './../ApplicationCommands/CreateStartEventCommand';
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 
 import { IApplicationCommand } from '../ApplicationCommands/IApplicationCommand';
 import { CreateTaskCommand } from '../ApplicationCommands/CreateTaskCommand';
+import { CreateEndEventCommand } from '../ApplicationCommands/CreateEndEventCommand';
+import { CreateGatewayCommand } from '../ApplicationCommands/CreateGatewayCommand';
 
 @Component({
   selector: 'app-toolbar',
@@ -21,8 +24,38 @@ export class ToolbarComponent implements OnInit {
     this.addElement.emit(
       new CreateTaskCommand(
         'task_2' + Math.random(),
-        200 + Math.random() * 100,
-        300 + Math.random() * 100
+        Math.round(200 + Math.random() * 100),
+        Math.round(300 + Math.random() * 100)
+      )
+    );
+  }
+
+  addStartEvent() {
+    this.addElement.emit(
+      new CreateStartEventCommand(
+        'StartEvent_' + Math.random(),
+        Math.round(200 + Math.random() * 100),
+        Math.round(300 + Math.random() * 100)
+      )
+    );
+  }
+
+  addEndEvent() {
+    this.addElement.emit(
+      new CreateEndEventCommand(
+        'EndEvent_' + Math.random(),
+        Math.round(200 + Math.random() * 100),
+        Math.round(300 + Math.random() * 100)
+      )
+    );
+  }
+
+  addGateway() {
+    this.addElement.emit(
+      new CreateGatewayCommand(
+        'Gateway_2' + Math.random(),
+        Math.round(200 + Math.random() * 100),
+        Math.round(300 + Math.random() * 100)
       )
     );
   }

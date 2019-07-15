@@ -1,7 +1,7 @@
 import { IApplicationCommand } from './IApplicationCommand';
 import { FlowElementEventVisitor } from './ApplicationCommandVisitors/FlowElementEventVisitor';
 
-export class CreateTaskCommand
+export class CreateEndEventCommand
   implements IApplicationCommand {
   constructor(
     public id: string,
@@ -11,6 +11,6 @@ export class CreateTaskCommand
 
   public Visit(
     flowElementEventVisitor: FlowElementEventVisitor): void {
-    flowElementEventVisitor.VisitTask(this);
+    flowElementEventVisitor.VisitEndEvent(this);
   }
 }
