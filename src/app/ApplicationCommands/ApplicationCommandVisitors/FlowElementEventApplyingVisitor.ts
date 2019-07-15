@@ -12,14 +12,14 @@ export class FlowElementEventApplyingVisitor
     super();
   }
 
-  public Visit(createTaskEvet: CreateTaskCommand): void {
+  public Visit(createTaskCommand: CreateTaskCommand): void {
     this.flowElementsStorage.Push(
       new Task({
-        id: createTaskEvet.id,
+        id: createTaskCommand.id,
         incoming: null,
         outgoing: null,
-        x: createTaskEvet.x,
-        y: createTaskEvet.y,
+        x: createTaskCommand.x,
+        y: createTaskCommand.y,
         width: 100,
         height: 70,
       })
