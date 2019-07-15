@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { DragDropModule } from '@angular/cdk/drag-drop';
 
 import { BoardComponent } from './board.component';
 import { EventElementComponent } from './event-element/event-element.component';
@@ -22,7 +23,8 @@ import { CoordsPipe } from './shared/pipes/coords.pipe';
     CoordsPipe
   ],
   imports: [
-    CommonModule
+    CommonModule,
+    DragDropModule
   ],
   exports: [BoardComponent],
 })

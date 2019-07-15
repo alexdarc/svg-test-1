@@ -22,7 +22,7 @@ import { IProcessComponent } from '../shared/models/process-component.model';
 import { IFlowElement } from './../shared/models/flow-element.model';
 
 @Component({
-  selector: 'svg:svg[app-event-element]',
+  selector: 'svg:g[app-event-element]',
   template: `<ng-template #dynamicContainer></ng-template>`,
 
   entryComponents: [StartComponent, GatewayComponent, TaskComponent, EndComponent, SequenceFlowComponent],

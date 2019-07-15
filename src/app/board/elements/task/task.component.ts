@@ -5,19 +5,8 @@ import { Task } from './task.model';
 
 @Component({
   selector: 'svg:svg[app-task]',
-  template: `
-    <svg [attr.x]="context.x" [attr.y]="context.y">
-      <rect x="0" y="0" [attr.width]="context.width" [attr.height]="context.height" rx="10" ry="10"></rect>
-    </svg>
-  `,
-  styles: [`
-    rect {
-      stroke: black;
-      stroke-width: 2px;
-      fill: white;
-      fill-opacity: 0.95;
-    }
-  `],
+  templateUrl: './task.component.html',
+  styleUrls: ['./task.component.css'],
 })
 export class TaskComponent implements IProcessComponent, OnInit {
   context: Task;

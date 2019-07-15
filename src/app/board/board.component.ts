@@ -3,6 +3,7 @@ import { Component, Input, ViewEncapsulation, Output, EventEmitter } from '@angu
 import { IFlowElement } from './shared/models/flow-element.model';
 import { IApplicationCommand } from '../ApplicationCommands/IApplicationCommand';
 import { CreateTaskCommand } from '../ApplicationCommands/CreateTaskCommand';
+import { CdkDragMove } from '@angular/cdk/drag-drop';
 
 @Component({
   selector: 'app-board',
@@ -29,5 +30,9 @@ export class BoardComponent {
         evt.offsetY
       )
     );
+  }
+
+  log(data) {
+    console.log(data);
   }
 }
