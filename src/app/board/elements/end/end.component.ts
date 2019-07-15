@@ -13,7 +13,7 @@ import { EndEvent } from './end-event.model';
   styles: [`
     circle {
       stroke: black;
-      stroke-width: 2px;
+      stroke-width: 4px;
       fill: white;
       fill-opacity: 0.95;
     }
