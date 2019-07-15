@@ -1,5 +1,5 @@
 <div class="toolbar navbar navbar-dark bg-dark">
-  <div>
+  <div class="col">
     <span class="toolbar__label navbar-text mr-3">Добавить:</span>
     <div
       class="btn-group btn-group-sm"
@@ -22,6 +22,23 @@
         class="btn btn-primary toolbar__item toolbar__item--end"
         (click)="addEndEvent()"
       >EndEvent</button>
+    </div>
+  </div>
+  <div class="col">
+    <span class="toolbar__label navbar-text mr-3">Действия:</span>
+    <div
+      class="btn-group btn-group-sm"
+      role="group"
+      aria-label="Действия"
+    >
+      <button
+        class="btn btn-secondary toolbar__item toolbar__item--undo"
+        (click)="undo.emit()"
+      >Отменить</button>
+      <button
+        class="btn btn-secondary toolbar__item toolbar__item--redo"
+        (click)="redo.emit()"
+      >Вернуть</button>
     </div>
   </div>
 </div>

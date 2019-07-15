@@ -1,3 +1,7 @@
+.toolbar {
+  border-radius: 3px;
+}
+
 .toolbar__label {
   padding: 0;
   padding-bottom: 1px;

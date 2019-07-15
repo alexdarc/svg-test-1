@@ -40,18 +40,26 @@ export class AppComponent {
       .Apply(command);
   }
 
+  onUndo() {
+    this.undoRedoStateManager
+      .Undo();
+  }
+
+  onRedo() {
+    this.undoRedoStateManager
+      .Redo();
+  }
+
   @HostListener('window:keydown', ['$event'])
   onKeyPress($event: KeyboardEvent) {
     // tslint:disable-next-line: deprecation
     if (($event.ctrlKey || $event.metaKey) && $event.keyCode === KEY_Y) {
-      this.undoRedoStateManager
-        .Redo();
+      this.onRedo();
     }
 
     // tslint:disable-next-line: deprecation
     if (($event.ctrlKey || $event.metaKey) && $event.keyCode === KEY_Z) {
-      this.undoRedoStateManager
-        .Undo();
+      this.onUndo();
     }
   }
 }
