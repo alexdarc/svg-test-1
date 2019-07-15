@@ -1,1 +1,5 @@
-<app-board [db]="gistService"></app-board>
+<app-board
+  [state]="flowElementStorage.Get()"
+  (eventBus)="OnBoardEvent($event)"
+>
+</app-board>

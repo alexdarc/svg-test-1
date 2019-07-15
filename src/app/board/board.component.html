@@ -1,6 +1,6 @@
 <svg class="board" (dblclick)="onAdd()">
   <svg app-event-element
-    *ngFor="let flowElement of flowElements"
+    *ngFor="let flowElement of state"
     [flowElement]="flowElement"
   >
   </svg>

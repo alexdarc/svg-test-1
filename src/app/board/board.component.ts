@@ -1,8 +1,8 @@
-import { Task } from './elements/task/task.model';
-import { Component, OnInit, Input, ViewEncapsulation } from '@angular/core';
+import { Component, Input, ViewEncapsulation, Output, EventEmitter } from '@angular/core';
 
-import { IDatabase } from './shared/models/database.model';
 import { IFlowElement } from './shared/models/flow-element.model';
+import { IApplicationCommand } from '../ApplicationCommands/IApplicationCommand';
+import { CreateTaskCommand } from '../ApplicationCommands/CreateTaskCommand';
 
 @Component({
   selector: 'app-board',
@@ -11,31 +11,23 @@ import { IFlowElement } from './shared/models/flow-element.model';
 
   encapsulation: ViewEncapsulation.None,
 })
-export class BoardComponent implements OnInit {
-  @Input() db: IDatabase;
+export class BoardComponent {
 
-  flowElements: IFlowElement[] = [];
+  @Input()
+  state: IFlowElement[];
+
+  @Output()
+  eventBus: EventEmitter<IApplicationCommand> = new EventEmitter<IApplicationCommand>();
 
   constructor() { }
 
-  ngOnInit() {
-    this.db.getEvents()
-      .subscribe((flowElements: IFlowElement[]) => {
-        this.flowElements = flowElements;
-      });
-  }
-
   onAdd() {
-    this.flowElements.push(
-      new Task({
-        id: 'task_2',
-        incoming: null,
-        outgoing: null,
-        x: 100,
-        y: 200,
-        width: 100,
-        height: 70,
-      })
+    this.eventBus.emit(
+      new CreateTaskCommand(
+        'task_2' + Math.random(),
+        200 + Math.random() * 100,
+        300 + Math.random() * 100
+      )
     );
   }
 }
