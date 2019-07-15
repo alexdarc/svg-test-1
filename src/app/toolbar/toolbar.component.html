@@ -1,0 +1,18 @@
+<div class="toolbar navbar navbar-dark bg-dark">
+  <div>
+    <span class="toolbar__label navbar-text mr-3">Добавить:</span>
+    <div
+      class="btn-group btn-group-sm"
+      role="group"
+      aria-label="Базовые элементы"
+    >
+      <button class="btn btn-primary toolbar__item toolbar__item--start">StartEvent</button>
+      <button
+        class="btn btn-primary toolbar__item toolbar__item--task"
+        (click)="addTask()"
+      >Task</button>
+      <button class="btn btn-primary toolbar__item toolbar__item--gateway">Gateway</button>
+      <button class="btn btn-primary toolbar__item toolbar__item--end">EndEvent</button>
+    </div>
+  </div>
+</div>

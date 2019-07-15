@@ -9,7 +9,7 @@ import { CreateTaskCommand } from '../ApplicationCommands/CreateTaskCommand';
   templateUrl: './board.component.html',
   styleUrls: ['./board.component.css'],
 
-  encapsulation: ViewEncapsulation.None,
+  encapsulation: ViewEncapsulation.ShadowDom,
 })
 export class BoardComponent {
 

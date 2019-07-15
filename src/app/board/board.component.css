@@ -4,6 +4,8 @@ svg svg {
 
 .board {
   width: 100%;
-  height: calc(100vh - 20px);
-  outline: 1px dashed #ccc;
+  height: 100%;
+  outline: 1px dashed #cccccc;
+
+  user-select: none;
 }
