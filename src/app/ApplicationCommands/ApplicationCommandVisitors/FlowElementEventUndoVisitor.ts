@@ -1,15 +1,17 @@
 import { FlowElementEventVisitor } from './FlowElementEventVisitor';
-import { IFlowElementsStorage } from 'src/app/FlowElementEventsStorage/IFlowElementsStorage';
+import { IFlowElementsStorage } from '../../FlowElementEventsStorage/IFlowElementsStorage';
 import { CreateTaskCommand } from '../CreateTaskCommand';
 import { CreateStartEventCommand } from '../CreateStartEventCommand';
 import { CreateEndEventCommand } from '../CreateEndEventCommand';
 import { CreateGatewayCommand } from '../CreateGatewayCommand';
+import { MoveCommand } from '../MoveCommand';
+import { ICoords } from './../../board/shared/models/coords.model';
 
 export class FlowElementEventUndoVisitor
   extends FlowElementEventVisitor {
 
   constructor(
-    private flowElementsStorage: IFlowElementsStorage
+    private flowElementsStorage: IFlowElementsStorage,
   ) {
     super();
   }
@@ -36,5 +38,15 @@ export class FlowElementEventUndoVisitor
     this.flowElementsStorage.Remove({
       id: createGatewayCommand.id
     });
+  }
+
+  public VisitMove(moveCommand: MoveCommand): void {
+    const flowElement = this.flowElementsStorage.GetById(moveCommand.id);
+    const negativeCoords: ICoords = {
+      x: -moveCommand.coords.x,
+      y: -moveCommand.coords.y,
+    };
+
+    flowElement.changePosition(negativeCoords);
   }
 }

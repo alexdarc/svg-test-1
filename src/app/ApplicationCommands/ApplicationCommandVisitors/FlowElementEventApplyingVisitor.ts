@@ -4,6 +4,7 @@ import { CreateTaskCommand } from '../CreateTaskCommand';
 import { CreateStartEventCommand } from '../CreateStartEventCommand';
 import { CreateEndEventCommand } from '../CreateEndEventCommand';
 import { CreateGatewayCommand } from '../CreateGatewayCommand';
+import { MoveCommand } from './../MoveCommand';
 
 import { Task } from '../../board/elements/task/task.model';
 import { StartEvent } from '../../board/elements/start/start-event.model';
@@ -14,7 +15,7 @@ export class FlowElementEventApplyingVisitor
   extends FlowElementEventVisitor {
 
   constructor(
-    private flowElementsStorage: IFlowElementsStorage
+    private flowElementsStorage: IFlowElementsStorage,
   ) {
     super();
   }
@@ -73,5 +74,11 @@ export class FlowElementEventApplyingVisitor
         height: 50,
       })
     );
+  }
+
+  public VisitMove(moveCommand: MoveCommand): void {
+    const flowElement = this.flowElementsStorage.GetById(moveCommand.id);
+
+    flowElement.changePosition(moveCommand.coords);
   }
 }
