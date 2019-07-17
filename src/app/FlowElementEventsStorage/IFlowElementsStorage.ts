@@ -4,4 +4,5 @@ export interface IFlowElementsStorage {
   Push(flowElement: IFlowElement): void;
   Remove(option: { id: string } ): void;
   Get(): IFlowElement[];
+  GetById(id: string): IFlowElement;
 }

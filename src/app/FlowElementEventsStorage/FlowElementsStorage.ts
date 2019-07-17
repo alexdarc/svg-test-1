@@ -20,7 +20,7 @@ export class FlowElementsStorage
       .push(flowElement);
   }
 
-  Remove(option: { id: string; }): void {
+  public Remove(option: { id: string; }): void {
     this.flowElements = this.flowElements
       .filter(
         (el) => el.id !== option.id
@@ -29,5 +29,11 @@ export class FlowElementsStorage
 
   public Get(): IFlowElement[] {
     return this.flowElements;
+  }
+
+  public GetById(id: string): IFlowElement {
+    return this.flowElements.find(
+      (el) => el.id === id
+    );
   }
 }
