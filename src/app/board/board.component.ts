@@ -1,9 +1,10 @@
 import { Component, Input, ViewEncapsulation, Output, EventEmitter } from '@angular/core';
 
+import { DragData } from './shared/directives/drag.directive';
 import { IFlowElement } from './shared/models/flow-element.model';
 import { IApplicationCommand } from '../ApplicationCommands/IApplicationCommand';
 import { CreateTaskCommand } from '../ApplicationCommands/CreateTaskCommand';
-import { CdkDragMove } from '@angular/cdk/drag-drop';
+import { MoveCommand } from '../ApplicationCommands/MoveCommand';
 
 @Component({
   selector: 'app-board',
@@ -32,7 +33,12 @@ export class BoardComponent {
     );
   }
 
-  log(data) {
-    console.log(data);
+  onRelease(dragData: DragData<string>) {
+    this.eventBus.emit(
+      new MoveCommand(
+        dragData.data,
+        dragData.coords
+      )
+    );
   }
 }

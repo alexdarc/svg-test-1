@@ -10,6 +10,7 @@ import { TaskComponent } from './elements/task/task.component';
 import { EndComponent } from './elements/end/end.component';
 import { SequenceFlowComponent } from './elements/sequence-flow/sequence-flow.component';
 import { CoordsPipe } from './shared/pipes/coords.pipe';
+import { DragDirective } from './shared/directives/drag.directive';
 
 @NgModule({
   declarations: [
@@ -20,7 +21,8 @@ import { CoordsPipe } from './shared/pipes/coords.pipe';
     TaskComponent,
     EndComponent,
     SequenceFlowComponent,
-    CoordsPipe
+    CoordsPipe,
+    DragDirective
   ],
   imports: [
     CommonModule,

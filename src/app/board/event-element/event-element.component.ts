@@ -28,7 +28,7 @@ import { IFlowElement } from './../shared/models/flow-element.model';
   entryComponents: [StartComponent, GatewayComponent, TaskComponent, EndComponent, SequenceFlowComponent],
 })
 export class EventElementComponent implements OnInit, OnDestroy, OnChanges {
-  @ViewChild('dynamicContainer', { read: ViewContainerRef }) dynamicContainer: ViewContainerRef;
+  @ViewChild('dynamicContainer', { read: ViewContainerRef, static: true }) dynamicContainer: ViewContainerRef;
 
   @Input() flowElement: IFlowElement;
 

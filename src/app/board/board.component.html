@@ -7,9 +7,9 @@
     *ngFor="let flowElement of state"
     [flowElement]="flowElement"
 
-    cdkDrag
-    cdkDragBoundary=".board"
-    (cdkDragReleased)="log($event)"
+    appDrag
+    [appDragData]="flowElement.id"
+    (appDragReleased)="onRelease($event)"
   >
   </g>
 </svg>

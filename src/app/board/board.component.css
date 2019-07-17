@@ -10,3 +10,11 @@ svg svg {
 
   user-select: none;
 }
+
+.app-drag-clone {
+  opacity: 0.5;
+}
+
+.app-drag-moving {
+  outline: 1px dotted #cccccc;
+}
