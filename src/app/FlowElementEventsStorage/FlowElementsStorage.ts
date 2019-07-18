@@ -1,6 +1,9 @@
 import { IFlowElementsStorage } from './IFlowElementsStorage';
 import { IFlowElement } from '../board/shared/models/flow-element.model';
 import { IDatabase } from '../board/shared/models/database.model';
+import { ICoords } from '../board/shared/models/coords.model';
+import { FlowNode } from './../board/shared/models/flow-node.model';
+import { SequenceFlow } from '../board/elements/sequence-flow/sequence-flow.model';
 
 export class FlowElementsStorage
   implements IFlowElementsStorage {
@@ -35,5 +38,8 @@ export class FlowElementsStorage
     return this.flowElements.find(
       (el) => el.id === id
     );
+  }
+
+  public MoveTo(id: string, coords: ICoords): void {
   }
 }

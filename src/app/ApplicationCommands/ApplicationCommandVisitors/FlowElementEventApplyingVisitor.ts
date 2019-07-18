@@ -77,8 +77,6 @@ export class FlowElementEventApplyingVisitor
   }
 
   public VisitMove(moveCommand: MoveCommand): void {
-    const flowElement = this.flowElementsStorage.GetById(moveCommand.id);
-
-    flowElement.changePosition(moveCommand.coords);
+    this.flowElementsStorage.MoveTo(moveCommand.id, moveCommand.coords);
   }
 }

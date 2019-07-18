@@ -1,5 +1,4 @@
 import { IFlowElement } from './flow-element.model';
-import { ICoords } from './coords.model';
 
 export class FlowNode implements IFlowElement {
   public id: string;
@@ -26,10 +25,5 @@ export class FlowNode implements IFlowElement {
     this.y = options.y;
     this.width = options.width;
     this.height = options.height;
-  }
-
-  changePosition(coords: ICoords) {
-    this.x += coords.x;
-    this.y += coords.y;
   }
 }

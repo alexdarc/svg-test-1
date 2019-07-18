@@ -18,8 +18,4 @@ export class SequenceFlow implements IFlowElement {
     this.targetRef = options.targetRef;
     this.waypoints = options.waypoints;
   }
-
-  changePosition(coords: ICoords): void {
-    throw new Error('Method not implemented.');
-  }
 }

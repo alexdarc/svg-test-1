@@ -41,12 +41,11 @@ export class FlowElementEventUndoVisitor
   }
 
   public VisitMove(moveCommand: MoveCommand): void {
-    const flowElement = this.flowElementsStorage.GetById(moveCommand.id);
     const negativeCoords: ICoords = {
       x: -moveCommand.coords.x,
       y: -moveCommand.coords.y,
     };
 
-    flowElement.changePosition(negativeCoords);
+    this.flowElementsStorage.MoveTo(moveCommand.id, negativeCoords);
   }
 }
