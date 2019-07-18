@@ -11,6 +11,7 @@ import { EndComponent } from './elements/end/end.component';
 import { SequenceFlowComponent } from './elements/sequence-flow/sequence-flow.component';
 import { CoordsPipe } from './shared/pipes/coords.pipe';
 import { DragDirective } from './shared/directives/drag.directive';
+import { WaypointsPipe } from './shared/pipes/waypoints.pipe';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,8 @@ import { DragDirective } from './shared/directives/drag.directive';
     EndComponent,
     SequenceFlowComponent,
     CoordsPipe,
-    DragDirective
+    DragDirective,
+    WaypointsPipe
   ],
   imports: [
     CommonModule,

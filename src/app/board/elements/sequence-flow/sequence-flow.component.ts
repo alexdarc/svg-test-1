@@ -20,7 +20,7 @@ import { SequenceFlow } from './sequence-flow.model';
           <path class="marker" d="M 1 5 L 11 10 L 1 15 Z"></path>
         </marker>
       </defs>
-      <path class="line" attr.d="m {{ coords }} "></path>
+      <path class="line" attr.d="m {{ context.waypoints | waypoints }} "></path>
     </svg>
   `,
   styles: [`
@@ -41,17 +41,6 @@ import { SequenceFlow } from './sequence-flow.model';
     }
   `],
 })
-export class SequenceFlowComponent implements IProcessComponent, OnInit {
+export class SequenceFlowComponent implements IProcessComponent {
   context: SequenceFlow;
-
-  coords: string;
-
-  constructor() { }
-
-  ngOnInit() {
-    this.coords = this.context.waypoints
-      .map((coords) => `${coords.x},${coords.y}`)
-      .join('L');
-  }
-
 }
