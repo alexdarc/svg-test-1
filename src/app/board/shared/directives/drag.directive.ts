@@ -23,7 +23,7 @@ export interface DragData<T> {
 })
 export class DragDirective<T = any> implements AfterViewInit, OnDestroy {
   dragRef: DragRef;
-  beforeStartedSub: Subscription;
+  startedSub: Subscription;
   releasedSub: Subscription;
   movedSub: Subscription;
   clone: Node;
@@ -71,7 +71,7 @@ export class DragDirective<T = any> implements AfterViewInit, OnDestroy {
     this.dragRef = this.dragDropService.createDrag(this.el);
     this.dragRef.withBoundaryElement(this.parentElement);
 
-    this.beforeStartedSub = this.dragRef.beforeStarted.subscribe(() => {
+    this.startedSub = this.dragRef.started.subscribe(() => {
       this.createClone();
 
       this.renderer.addClass(
@@ -120,8 +120,8 @@ export class DragDirective<T = any> implements AfterViewInit, OnDestroy {
   }
 
   ngOnDestroy() {
-    if (this.beforeStartedSub) {
-      this.beforeStartedSub.unsubscribe();
+    if (this.startedSub) {
+      this.startedSub.unsubscribe();
     }
 
     if (this.movedSub) {
