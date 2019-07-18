@@ -63,7 +63,7 @@ export class DragDirective<T = any> implements AfterViewInit, OnDestroy {
     this.renderer.insertBefore(
       this.parentElement,
       this.clone,
-      this.parentElement.firstChild
+      this.el.nativeElement,
     );
   }
 
