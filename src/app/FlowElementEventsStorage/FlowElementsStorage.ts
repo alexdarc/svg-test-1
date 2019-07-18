@@ -41,5 +41,45 @@ export class FlowElementsStorage
   }
 
   public MoveTo(id: string, coords: ICoords): void {
+    const flowNode: FlowNode = this.GetById(id) as FlowNode;
+    const incomingArrows: SequenceFlow[] = (flowNode.incoming || []).map((seqFlowId) => {
+      return this.GetById(seqFlowId) as SequenceFlow;
+    });
+    const outgoingArrows: SequenceFlow[] = (flowNode.outgoing || []).map((seqFlowId) => {
+      return this.GetById(seqFlowId) as SequenceFlow;
+    });
+
+    flowNode.x += coords.x;
+    flowNode.y += coords.y;
+
+    const leftPoint: ICoords = {
+      x: flowNode.x,
+      y: flowNode.y + flowNode.height / 2,
+    };
+
+    const rightPoint: ICoords = {
+      x: flowNode.x + flowNode.width,
+      y: flowNode.y + flowNode.height / 2,
+    };
+
+    incomingArrows.forEach((seqFlow) => {
+      seqFlow.waypoints = seqFlow.waypoints.map((waypoint, index, source) => {
+        if (index === (source.length - 1)) {
+          return leftPoint;
+        }
+
+        return waypoint;
+      });
+    });
+
+    outgoingArrows.forEach((seqFlow) => {
+      seqFlow.waypoints = seqFlow.waypoints.map((waypoint, index) => {
+        if (index === 0) {
+          return rightPoint;
+        }
+
+        return waypoint;
+      });
+    });
   }
 }
