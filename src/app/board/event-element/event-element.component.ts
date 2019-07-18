@@ -49,7 +49,7 @@ export class EventElementComponent implements OnInit, OnDestroy, OnChanges {
   }
 
   ngOnChanges(changes: SimpleChanges) {
-    if (changes['componentData']) {
+    if (changes.flowElement) {
       this.createComponent();
     }
   }
