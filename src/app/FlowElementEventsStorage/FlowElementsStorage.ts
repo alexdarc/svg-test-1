@@ -52,20 +52,13 @@ export class FlowElementsStorage
     flowNode.x += coords.x;
     flowNode.y += coords.y;
 
-    const leftPoint: ICoords = {
-      x: flowNode.x,
-      y: flowNode.y + flowNode.height / 2,
-    };
-
-    const rightPoint: ICoords = {
-      x: flowNode.x + flowNode.width,
-      y: flowNode.y + flowNode.height / 2,
-    };
-
     incomingArrows.forEach((seqFlow) => {
       seqFlow.waypoints = seqFlow.waypoints.map((waypoint, index, source) => {
         if (index === (source.length - 1)) {
-          return leftPoint;
+          return {
+            x: waypoint.x + coords.x,
+            y: waypoint.y + coords.y,
+          };
         }
 
         return waypoint;
@@ -75,7 +68,10 @@ export class FlowElementsStorage
     outgoingArrows.forEach((seqFlow) => {
       seqFlow.waypoints = seqFlow.waypoints.map((waypoint, index) => {
         if (index === 0) {
-          return rightPoint;
+          return {
+            x: waypoint.x + coords.x,
+            y: waypoint.y + coords.y,
+          };
         }
 
         return waypoint;
