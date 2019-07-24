@@ -1,4 +1,4 @@
-import { FlowElementEventVisitor } from './FlowElementEventVisitor';
+import { ApplicationCommandVisitor } from './ApplicationCommandVisitor';
 import { IFlowElementsStorage } from '../../FlowElementEventsStorage/IFlowElementsStorage';
 import { CreateTaskCommand } from '../CreateTaskCommand';
 import { CreateStartEventCommand } from '../CreateStartEventCommand';
@@ -7,8 +7,8 @@ import { CreateGatewayCommand } from '../CreateGatewayCommand';
 import { MoveCommand } from '../MoveCommand';
 import { ICoords } from './../../board/shared/models/coords.model';
 
-export class FlowElementEventUndoVisitor
-  extends FlowElementEventVisitor {
+export class ApplicationCommandUndoVisitor
+  extends ApplicationCommandVisitor {
 
   constructor(
     private flowElementsStorage: IFlowElementsStorage,
@@ -46,6 +46,9 @@ export class FlowElementEventUndoVisitor
       y: -moveCommand.coords.y,
     };
 
-    this.flowElementsStorage.MoveTo(moveCommand.id, negativeCoords);
+    this.flowElementsStorage.MoveTo({
+      id: moveCommand.id, 
+      coords: negativeCoords
+    });
   }
 }

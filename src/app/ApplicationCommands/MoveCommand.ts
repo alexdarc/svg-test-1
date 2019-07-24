@@ -1,6 +1,6 @@
 import { ICoords } from './../board/shared/models/coords.model';
 import { IApplicationCommand } from './IApplicationCommand';
-import { FlowElementEventVisitor } from './ApplicationCommandVisitors/FlowElementEventVisitor';
+import { ApplicationCommandVisitor } from './ApplicationCommandVisitors/ApplicationCommandVisitor';
 
 export class MoveCommand
   implements IApplicationCommand {
@@ -10,7 +10,7 @@ export class MoveCommand
   }
 
   public Visit(
-    flowElementEventVisitor: FlowElementEventVisitor): void {
-    flowElementEventVisitor.VisitMove(this);
+    applicationCommandVisitor: ApplicationCommandVisitor): void {
+    applicationCommandVisitor.VisitMove(this);
   }
 }
