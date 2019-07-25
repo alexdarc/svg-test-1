@@ -13,6 +13,7 @@ import { ApplicationCommandApplyingVisitor }
   from './ApplicationCommands/ApplicationCommandVisitors/ApplicationCommandApplyingVisitor';
 import { ApplicationCommandUndoVisitor }
   from './ApplicationCommands/ApplicationCommandVisitors/ApplicationCommandUndoVisitor';
+import { MoveFlowNodeCommandHandler } from './BL/MoveFlowNodeCommandHandler';
 
 
 const KEY_Y = 89;
@@ -35,7 +36,9 @@ export class AppComponent {
 
     this.undoRedoStateManager
       = new UndoRedoStateManager<IApplicationCommand, ApplicationCommandVisitor>(
-        new ApplicationCommandApplyingVisitor(this.flowElementStorage),
+        new ApplicationCommandApplyingVisitor(
+          this.flowElementStorage,
+          new MoveFlowNodeCommandHandler(this.flowElementStorage)),
         new ApplicationCommandUndoVisitor(this.flowElementStorage)
       );
   }
