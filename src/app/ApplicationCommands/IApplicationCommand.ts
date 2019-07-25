@@ -1,6 +1,6 @@
-import { FlowElementEventVisitor } from './ApplicationCommandVisitors/FlowElementEventVisitor';
+import { ApplicationCommandVisitor } from './ApplicationCommandVisitors/ApplicationCommandVisitor';
 
 export interface IApplicationCommand {
   Visit(
-    flowElementEventVisitor: FlowElementEventVisitor): void;
+    applicationCommandVisitor: ApplicationCommandVisitor): void;
 }

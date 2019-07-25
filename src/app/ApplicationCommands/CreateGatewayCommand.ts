@@ -1,5 +1,5 @@
 import { IApplicationCommand } from './IApplicationCommand';
-import { FlowElementEventVisitor } from './ApplicationCommandVisitors/FlowElementEventVisitor';
+import { ApplicationCommandVisitor } from './ApplicationCommandVisitors/ApplicationCommandVisitor';
 
 export class CreateGatewayCommand
   implements IApplicationCommand {
@@ -10,7 +10,7 @@ export class CreateGatewayCommand
   }
 
   public Visit(
-    flowElementEventVisitor: FlowElementEventVisitor): void {
-    flowElementEventVisitor.VisitGateway(this);
+    applicationCommandVisitor: ApplicationCommandVisitor): void {
+    applicationCommandVisitor.VisitGateway(this);
   }
 }
