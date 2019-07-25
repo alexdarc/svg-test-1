@@ -22,13 +22,13 @@ import { IProcessComponent } from '../shared/models/process-component.model';
 import { IFlowElement } from './../shared/models/flow-element.model';
 
 @Component({
-  selector: 'svg:svg[app-event-element]',
+  selector: 'svg:g[app-event-element]',
   template: `<ng-template #dynamicContainer></ng-template>`,
 
   entryComponents: [StartComponent, GatewayComponent, TaskComponent, EndComponent, SequenceFlowComponent],
 })
 export class EventElementComponent implements OnInit, OnDestroy, OnChanges {
-  @ViewChild('dynamicContainer', { read: ViewContainerRef }) dynamicContainer: ViewContainerRef;
+  @ViewChild('dynamicContainer', { read: ViewContainerRef, static: true }) dynamicContainer: ViewContainerRef;
 
   @Input() flowElement: IFlowElement;
 
@@ -49,7 +49,7 @@ export class EventElementComponent implements OnInit, OnDestroy, OnChanges {
   }
 
   ngOnChanges(changes: SimpleChanges) {
-    if (changes['componentData']) {
+    if (changes.flowElement) {
       this.createComponent();
     }
   }

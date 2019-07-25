@@ -2,6 +2,8 @@
   <div class="toolbar">
     <app-toolbar
       (addElement)="OnBoardEvent($event)"
+      (undo)="onUndo()"
+      (redo)="onRedo()"
     ></app-toolbar>
   </div>
   <div class="board">

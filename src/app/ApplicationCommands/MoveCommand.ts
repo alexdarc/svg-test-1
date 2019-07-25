@@ -1,16 +1,16 @@
+import { ICoords } from './../board/shared/models/coords.model';
 import { IApplicationCommand } from './IApplicationCommand';
 import { ApplicationCommandVisitor } from './ApplicationCommandVisitors/ApplicationCommandVisitor';
 
-export class CreateEndEventCommand
+export class MoveCommand
   implements IApplicationCommand {
   constructor(
     public id: string,
-    public x: number,
-    public y: number) {
+    public coords: ICoords) {
   }
 
   public Visit(
     applicationCommandVisitor: ApplicationCommandVisitor): void {
-    applicationCommandVisitor.VisitEndEvent(this);
+    applicationCommandVisitor.VisitMove(this);
   }
 }

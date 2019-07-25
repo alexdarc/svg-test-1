@@ -1,5 +1,5 @@
 import { IApplicationCommand } from './IApplicationCommand';
-import { FlowElementEventVisitor } from './ApplicationCommandVisitors/FlowElementEventVisitor';
+import { ApplicationCommandVisitor } from './ApplicationCommandVisitors/ApplicationCommandVisitor';
 
 export class CreateTaskCommand
   implements IApplicationCommand {
@@ -10,7 +10,7 @@ export class CreateTaskCommand
   }
 
   public Visit(
-    flowElementEventVisitor: FlowElementEventVisitor): void {
-    flowElementEventVisitor.VisitTask(this);
+    applicationCommandVisitor: ApplicationCommandVisitor): void {
+    applicationCommandVisitor.VisitTask(this);
   }
 }

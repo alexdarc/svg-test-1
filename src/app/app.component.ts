@@ -5,10 +5,15 @@ import { GistService } from './shared/services/gist.service';
 
 import { UndoRedoStateManager } from './UndoRedoStateManager/UndoRedoStateManager';
 import { IApplicationCommand } from './ApplicationCommands/IApplicationCommand';
-import { FlowElementEventVisitor } from './ApplicationCommands/ApplicationCommandVisitors/FlowElementEventVisitor';
 import { FlowElementsStorage } from './FlowElementEventsStorage/FlowElementsStorage';
-import { FlowElementEventApplyingVisitor } from './ApplicationCommands/ApplicationCommandVisitors/FlowElementEventApplyingVisitor';
-import { FlowElementEventUndoVisitor } from './ApplicationCommands/ApplicationCommandVisitors/FlowElementEventUndoVisitor';
+
+import { ApplicationCommandVisitor } 
+  from './ApplicationCommands/ApplicationCommandVisitors/ApplicationCommandVisitor';
+import { ApplicationCommandApplyingVisitor } 
+  from './ApplicationCommands/ApplicationCommandVisitors/ApplicationCommandApplyingVisitor';
+import { ApplicationCommandUndoVisitor }
+  from './ApplicationCommands/ApplicationCommandVisitors/ApplicationCommandUndoVisitor';
+
 
 const KEY_Y = 89;
 const KEY_Z = 90;
@@ -19,7 +24,7 @@ const KEY_Z = 90;
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  undoRedoStateManager: UndoRedoStateManager<IApplicationCommand, FlowElementEventVisitor>;
+  undoRedoStateManager: UndoRedoStateManager<IApplicationCommand, ApplicationCommandVisitor>;
   flowElementStorage: FlowElementsStorage;
 
   constructor(
@@ -29,9 +34,9 @@ export class AppComponent {
     this.flowElementStorage = new FlowElementsStorage(gistService);
 
     this.undoRedoStateManager
-      = new UndoRedoStateManager<IApplicationCommand, FlowElementEventVisitor>(
-        new FlowElementEventApplyingVisitor(this.flowElementStorage),
-        new FlowElementEventUndoVisitor(this.flowElementStorage)
+      = new UndoRedoStateManager<IApplicationCommand, ApplicationCommandVisitor>(
+        new ApplicationCommandApplyingVisitor(this.flowElementStorage),
+        new ApplicationCommandUndoVisitor(this.flowElementStorage)
       );
   }
 
@@ -40,18 +45,26 @@ export class AppComponent {
       .Apply(command);
   }
 
+  onUndo() {
+    this.undoRedoStateManager
+      .Undo();
+  }
+
+  onRedo() {
+    this.undoRedoStateManager
+      .Redo();
+  }
+
   @HostListener('window:keydown', ['$event'])
   onKeyPress($event: KeyboardEvent) {
     // tslint:disable-next-line: deprecation
     if (($event.ctrlKey || $event.metaKey) && $event.keyCode === KEY_Y) {
-      this.undoRedoStateManager
-        .Redo();
+      this.onRedo();
     }
 
     // tslint:disable-next-line: deprecation
     if (($event.ctrlKey || $event.metaKey) && $event.keyCode === KEY_Z) {
-      this.undoRedoStateManager
-        .Undo();
+      this.onUndo();
     }
   }
 }

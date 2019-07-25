@@ -15,6 +15,9 @@ export class ToolbarComponent implements OnInit {
   @Output() addElement: EventEmitter<IApplicationCommand> =
     new EventEmitter<IApplicationCommand>();
 
+  @Output() undo: EventEmitter<any> = new EventEmitter();
+  @Output() redo: EventEmitter<any> = new EventEmitter();
+
   constructor() { }
 
   ngOnInit() {
