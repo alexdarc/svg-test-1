@@ -77,15 +77,15 @@ export class ApplicationCommandApplyingVisitor
     this.flowElementsStorage
       .Push({ 
           flowElement:
-          new Gateway({
-            id: createGatewayCommand.id,
-            incoming: null,
-            outgoing: null,
-            x: createGatewayCommand.x,
-            y: createGatewayCommand.y,
-            width: 50,
-            height: 50,
-          })
+            new Gateway({
+              id: createGatewayCommand.id,
+              incoming: null,
+              outgoing: null,
+              x: createGatewayCommand.x,
+              y: createGatewayCommand.y,
+              width: 50,
+              height: 50,
+            })
         }
       );
   }
