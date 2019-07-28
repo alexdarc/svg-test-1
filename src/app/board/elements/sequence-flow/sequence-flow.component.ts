@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 
 import { IProcessComponent } from '../../shared/models/process-component.model';
 import { SequenceFlow } from './sequence-flow.model';
@@ -42,5 +42,6 @@ import { SequenceFlow } from './sequence-flow.model';
   `],
 })
 export class SequenceFlowComponent implements IProcessComponent {
+  @Input()
   context: SequenceFlow;
 }

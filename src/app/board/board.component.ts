@@ -17,6 +17,8 @@ import { SequenceFlow } from './elements/sequence-flow/sequence-flow.model';
 })
 export class BoardComponent {
 
+  dragAndDropSerice:any;
+
   @Input()
   set state(value: IFlowElement[]) {
     this.flowNodes = value.filter(e => e instanceof FlowNode)
@@ -52,10 +54,5 @@ export class BoardComponent {
         options.coords
       )
     );
-  }
-
-  onmouseover(event:any)
-  {
-    console.log(event);
   }
 }
