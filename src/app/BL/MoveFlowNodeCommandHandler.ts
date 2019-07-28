@@ -78,7 +78,7 @@ export class MoveFlowNodeCommandHandler
                 update: new UpdateInstruction({
                     set: {
                         waypoints: option.sequenceFlow
-                            .waypoints
+                            .waypoints.map(o => o)
                     }
                 })
             })
