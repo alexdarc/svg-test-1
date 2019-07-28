@@ -4,11 +4,17 @@
 >
   <g
     app-event-element
-    *ngFor="let flowElement of state"
+    *ngFor="let flowElement of flowNodes"
     [flowElement]="flowElement"
-
     appDrag
+    (mouseover)="onmouseover($event)"
     (appDragReleased)="onRelease({ flowElementId: flowElement.id, coords: $event })"
   >
   </g>
+
+  <svg
+    app-sequence-flow
+    *ngFor="let sequenceFlow of sequenceFlows"
+    [context]="sequenceFlow">
+  </svg>
 </svg>

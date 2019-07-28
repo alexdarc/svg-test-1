@@ -39,7 +39,9 @@ export class AppComponent {
         new ApplicationCommandApplyingVisitor(
           this.flowElementStorage,
           new MoveFlowNodeCommandHandler(this.flowElementStorage)),
-        new ApplicationCommandUndoVisitor(this.flowElementStorage)
+        new ApplicationCommandUndoVisitor(
+          this.flowElementStorage,
+          new MoveFlowNodeCommandHandler(this.flowElementStorage)),
       );
   }
 

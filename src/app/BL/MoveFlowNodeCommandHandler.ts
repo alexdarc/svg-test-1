@@ -11,7 +11,7 @@ export class MoveFlowNodeCommandHandler
     {
     }
 
-    public Handle(option: { flowNodeId: string, coords: ICoords })
+    public Handle(option: { flowNodeId: string, offset: ICoords })
     {
         const flowNode: FlowNode = this.flowElementsStorage
             .GetById({ id: option.flowNodeId }) as FlowNode;
@@ -21,8 +21,8 @@ export class MoveFlowNodeCommandHandler
                 id: option.flowNodeId,
                 update: new UpdateInstruction({
                     set: {
-                        x: flowNode.x + option.coords.x,
-                        y: flowNode.y + option.coords.y
+                        x: flowNode.x + option.offset.x,
+                        y: flowNode.y + option.offset.y
                     }
                 })
             }
@@ -39,7 +39,7 @@ export class MoveFlowNodeCommandHandler
             this.UpdateWayPoint({
                 sequenceFlow: seqFlow,
                 index: seqFlow.waypoints.length - 1,
-                coords: option.coords
+                offset: option.offset
             })
         });
 
@@ -53,7 +53,7 @@ export class MoveFlowNodeCommandHandler
             this.UpdateWayPoint({
                 sequenceFlow: seqFlow,
                 index: 0,
-                coords: option.coords
+                offset: option.offset
             })
         });
     }
@@ -62,14 +62,14 @@ export class MoveFlowNodeCommandHandler
     private UpdateWayPoint(option: {
         sequenceFlow: SequenceFlow,
         index: number,
-        coords: ICoords})
+        offset: ICoords})
     {
 
         let waypoint = option.sequenceFlow
         .waypoints[option.index];
 
-        waypoint.x = waypoint.x + option.coords.x;
-        waypoint.y = waypoint.y + option.coords.y;
+        waypoint.x = waypoint.x + option.offset.x;
+        waypoint.y = waypoint.y + option.offset.y;
         option.sequenceFlow.waypoints[option.index] = waypoint;
 
         this.flowElementsStorage
@@ -78,7 +78,7 @@ export class MoveFlowNodeCommandHandler
                 update: new UpdateInstruction({
                     set: {
                         waypoints: option.sequenceFlow
-                            .waypoints.map(o => o)
+                            .waypoints
                     }
                 })
             })

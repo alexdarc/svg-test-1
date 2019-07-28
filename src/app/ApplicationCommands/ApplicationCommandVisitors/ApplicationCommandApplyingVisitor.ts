@@ -94,7 +94,7 @@ export class ApplicationCommandApplyingVisitor
     this.moveFlowNodeCommandHandler
       .Handle({
         flowNodeId: moveCommand.id,
-        coords: moveCommand.coords
+        offset: moveCommand.coords
       })
   }
 }

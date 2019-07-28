@@ -5,6 +5,8 @@ import { IApplicationCommand } from '../ApplicationCommands/IApplicationCommand'
 import { CreateTaskCommand } from '../ApplicationCommands/CreateTaskCommand';
 import { MoveCommand } from '../ApplicationCommands/MoveCommand';
 import { Point } from '@angular/cdk/drag-drop/typings/drag-ref';
+import { FlowNode } from './shared/models/flow-node.model';
+import { SequenceFlow } from './elements/sequence-flow/sequence-flow.model';
 
 @Component({
   selector: 'app-board',
@@ -16,7 +18,17 @@ import { Point } from '@angular/cdk/drag-drop/typings/drag-ref';
 export class BoardComponent {
 
   @Input()
-  state: IFlowElement[];
+  set state(value: IFlowElement[]) {
+    this.flowNodes = value.filter(e => e instanceof FlowNode)
+      .map(e => e as FlowNode);
+
+    this.sequenceFlows = value.filter(e => e instanceof SequenceFlow)
+      .map(e => e as SequenceFlow);
+  };
+
+  private flowNodes: FlowNode[];
+
+  private sequenceFlows: SequenceFlow[];
 
   @Output()
   eventBus: EventEmitter<IApplicationCommand> = new EventEmitter<IApplicationCommand>();
@@ -40,5 +52,10 @@ export class BoardComponent {
         options.coords
       )
     );
+  }
+
+  onmouseover(event:any)
+  {
+    console.log(event);
   }
 }

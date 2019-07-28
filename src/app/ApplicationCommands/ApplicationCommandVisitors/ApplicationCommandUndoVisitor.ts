@@ -6,12 +6,14 @@ import { CreateEndEventCommand } from '../CreateEndEventCommand';
 import { CreateGatewayCommand } from '../CreateGatewayCommand';
 import { MoveCommand } from '../MoveCommand';
 import { ICoords } from './../../board/shared/models/coords.model';
+import { MoveFlowNodeCommandHandler } from 'src/app/BL/MoveFlowNodeCommandHandler';
 
 export class ApplicationCommandUndoVisitor
   extends ApplicationCommandVisitor {
 
   constructor(
     private flowElementsStorage: IFlowElementsStorage,
+    private moveFlowNodeCommandHandler: MoveFlowNodeCommandHandler
   ) {
     super();
   }
@@ -41,14 +43,13 @@ export class ApplicationCommandUndoVisitor
   }
 
   public VisitMove(moveCommand: MoveCommand): void {
-    const negativeCoords: ICoords = {
-      x: -moveCommand.coords.x,
-      y: -moveCommand.coords.y,
-    };
-
-    this.flowElementsStorage.MoveTo({
-      id: moveCommand.id, 
-      coords: negativeCoords
-    });
+    this.moveFlowNodeCommandHandler
+      .Handle({
+        flowNodeId: moveCommand.id,
+        offset: {
+          x: -moveCommand.coords.x,
+          y: -moveCommand.coords.y,
+        }
+      })
   }
 }
