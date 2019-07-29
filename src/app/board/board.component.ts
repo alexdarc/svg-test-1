@@ -17,8 +17,6 @@ import { SequenceFlow } from './elements/sequence-flow/sequence-flow.model';
 })
 export class BoardComponent {
 
-  dragAndDropSerice:any;
-
   @Input()
   set state(value: IFlowElement[]) {
     this.flowNodes = value.filter(e => e instanceof FlowNode)

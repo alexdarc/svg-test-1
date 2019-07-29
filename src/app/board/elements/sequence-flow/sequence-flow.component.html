@@ -28,7 +28,9 @@
             [attr.marker-end]="$last ? 'url(\'#flow-end\')' : ''"/>
       </svg>
       <svg:circle 
-        *ngFor="let waypoint of context.waypoints;"
+        *ngFor="let waypoint of context.waypoints; let $index = index"
+        appDraggable
+        (onmove)="onmove($event, $index)"
         attr.cx="{{waypoint.x}}"
         attr.cy="{{waypoint.y}}"
         r="5">

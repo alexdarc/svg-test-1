@@ -6,9 +6,7 @@
     app-event-element
     *ngFor="let flowElement of flowNodes"
     [flowElement]="flowElement"
-    appDrag	
-    [appDragData]="flowElement.id"	
-    (appDragReleased)="onRelease({flowElementId: flowElement.id, coords: $event})"
+    appDropContainer
   >
   </g>
 
