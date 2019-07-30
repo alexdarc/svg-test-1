@@ -6,8 +6,8 @@ import {
   Input,
 } from '@angular/core';
 
-import { DragAndDropService } from '../dragAndDropService/draganddrop.service';
-import { DropContainer } from '../dragAndDropService/dropContainer';
+import { DragAndDropService } from '../DragAndDropService/draganddrop.service';
+import { DropContainer } from '../DragAndDropService/DropContainer';
 import { EnterEvent } from './Events/EnterEvent';
 import { OutEvent } from './Events/OutEvent';
 import { DropEvent } from './Events/DropEvent';
@@ -38,13 +38,10 @@ export class DropContainerDirective {
 
   @HostListener('mouseover')
   mouseover() {
-    this.dragAndDropService
-      .dropContainer = new DropContainer<any, any>({
+    this.dragAndDropService.dropContainer = new DropContainer<any, any>({
         predicate: this.predicate,
         data: this.data
       });
-    console.log(this.dragAndDropService);
-
   }
 
   @HostListener('mouseout')
@@ -55,7 +52,6 @@ export class DropContainerDirective {
 
   @HostListener('mouseup')
   mouseup() {
-
     this.drop.emit(new DropEvent({
       acceptedDrop: this.predicate(
           this.dragAndDropService

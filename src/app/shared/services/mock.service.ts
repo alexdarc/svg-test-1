@@ -17,8 +17,6 @@ export class MockService implements IDatabase {
   constructor() { }
 
   getEvents(): Observable<IFlowElement[]> {
-    console.log('test');
-
     return of([
       new SequenceFlow({
         id: 'SequenceFlow_1b0wrod',
