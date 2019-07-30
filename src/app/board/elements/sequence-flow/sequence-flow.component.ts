@@ -2,7 +2,8 @@ import { Component, Input } from '@angular/core';
 
 import { IProcessComponent } from '../../shared/models/process-component.model';
 import { SequenceFlow } from './sequence-flow.model';
-import { MoveEvent, DropEvent } from 'src/app/shared/directives/draggable.directive';
+import { MoveEvent } from 'src/app/shared/DragAndDropModule/DraggableDirective/Events/MoveEvent';
+import { DropEvent } from 'src/app/shared/DragAndDropModule/DraggableDirective/Events/DropEvent';
 
 @Component({
   selector: 'svg:svg[app-sequence-flow]',

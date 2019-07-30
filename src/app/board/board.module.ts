@@ -12,8 +12,8 @@ import { SequenceFlowComponent } from './elements/sequence-flow/sequence-flow.co
 import { CoordsPipe } from './shared/pipes/coords.pipe';
 import { DragDirective } from './shared/directives/drag.directive';
 import { WaypointsPipe } from './shared/pipes/waypoints.pipe';
-import { DraggableDirective } from '../shared/directives/draggable.directive';
-import { DropContainerDirective } from '../shared/directives/dropcontainer.directive';
+import { DraggableDirective } from '../shared/DragAndDropModule/DraggableDirective/draggable.derective';
+import { DropContainerDirective } from '../shared/DragAndDropModule/DropContainerDirective/dropcontainer.directive';
 
 
 @NgModule({

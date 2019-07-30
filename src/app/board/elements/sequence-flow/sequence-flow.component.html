@@ -31,7 +31,7 @@
       (move)="draging($event, $index)"
       (start)="starDragging()"
       (drop)="endDragging($event, $index)"
-      data="context"
+      [data]="context"
       attr.cx="{{waypoint.x}}"
       attr.cy="{{waypoint.y}}"
       r="5">
