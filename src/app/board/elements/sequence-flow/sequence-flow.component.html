@@ -1,38 +1,40 @@
-    <svg>
-      <defs>
-        <marker
-          id="flow-end"
-          viewBox="0 0 20 20"
-          refX="11"
-          refY="10"
-          markerWidth="10"
-          markerHeight="10"
-          orient="auto"
-        >
-          <path class="marker" d="M 1 5 L 11 10 L 1 15 Z"></path>
-        </marker>
-      </defs>
-      <svg 
-        *ngFor="
+<svg>
+  <defs>
+    <marker id="flow-end"
+      viewBox="0 0 20 20"
+      refX="11"
+      refY="10"
+      markerWidth="10"
+      markerHeight="10"
+      orient="auto">
+      <path class="marker"
+        d="M 1 5 L 11 10 L 1 15 Z"></path>
+    </marker>
+  </defs>
+  <g
+    [style.pointer-events]="inDragging ? 'none' : 'all'">
+    <svg *ngFor="
           let waypoint of context.waypoints;
           let $index = index;
           let $last = last;
           let $first = first">
-          <line 
-            *ngIf="!$first"
-            attr.x1="{{context.waypoints[$index - 1].x}}"
-            attr.y1="{{context.waypoints[$index - 1].y}}"
-            attr.x2="{{waypoint.x}}"
-            attr.y2="{{waypoint.y}}"
-            class="line"
-            [attr.marker-end]="$last ? 'url(\'#flow-end\')' : ''"/>
-      </svg>
-      <svg:circle 
-        *ngFor="let waypoint of context.waypoints; let $index = index"
-        appDraggable
-        (onmove)="onmove($event, $index)"
-        attr.cx="{{waypoint.x}}"
-        attr.cy="{{waypoint.y}}"
-        r="5">
-      </svg:circle>
+      <line *ngIf="!$first"
+        attr.x1="{{context.waypoints[$index - 1].x}}"
+        attr.y1="{{context.waypoints[$index - 1].y}}"
+        attr.x2="{{waypoint.x}}"
+        attr.y2="{{waypoint.y}}"
+        class="line"
+        [attr.marker-end]="$last ? 'url(\'#flow-end\')' : ''" />
     </svg>
+    <svg:circle *ngFor="let waypoint of context.waypoints; let $index = index"
+      appDraggable
+      (move)="draging($event, $index)"
+      (start)="starDragging()"
+      (drop)="endDragging($event, $index)"
+      data="context"
+      attr.cx="{{waypoint.x}}"
+      attr.cy="{{waypoint.y}}"
+      r="5">
+    </svg:circle>
+  </g>
+</svg>

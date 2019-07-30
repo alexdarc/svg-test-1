@@ -53,4 +53,8 @@ export class BoardComponent {
       )
     );
   }
+
+  flowNodeDropPredicate(data: any): boolean {
+    return data != null;
+  }
 }

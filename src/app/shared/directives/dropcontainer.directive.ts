@@ -5,8 +5,17 @@ import {
   Output,
   EventEmitter,
   HostListener,
+  Predicate,
   Input,
 } from '@angular/core';
+
+import { DragAndDropService, DropContainer } from './draganddrop.service';
+
+export class EnterEvent {
+}
+
+export class OutEvent {
+}
 
 @Directive({
   selector: '[appDropContainer]'
@@ -14,21 +23,33 @@ import {
 export class DropContainerDirective {
   constructor(
       private elementRef: ElementRef,
-      private renderer: Renderer2
+      private renderer: Renderer2,
+      private dragAndDropService: DragAndDropService
   ) {
   }
+  @Output()
+  enter: EventEmitter<EnterEvent> = new EventEmitter<EnterEvent>();
 
-  isMouseOver: boolean;
+  @Output()
+  out: EventEmitter<EnterEvent> = new EventEmitter<EnterEvent>();
+
+  @Input()
+  data: any;
+
+  @Input()
+  predicate: (data: any) => boolean = () => false
 
   @HostListener('mouseover', ['$event'])
   mouseover() {
-    this.isMouseOver = true;
-    console.log("Over");
+    this.dragAndDropService
+      .dropContainer = new DropContainer<any, any>({
+        predicate: this.predicate,
+        data: this.data
+      });
   }
 
   @HostListener('mouseout', ['$event'])
   mouseout() {
-    this.isMouseOver = false;
-    console.log("Out");
+    this.dragAndDropService.dropContainer = null;
   }
 }
