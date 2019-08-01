@@ -24,11 +24,10 @@ export class BoardComponent {
 
     this.sequenceFlows = value.filter(e => e instanceof SequenceFlow)
       .map(e => e as SequenceFlow);
-  };
+  }
 
-  private flowNodes: FlowNode[];
-
-  private sequenceFlows: SequenceFlow[];
+  flowNodes: FlowNode[];
+  sequenceFlows: SequenceFlow[];
 
   @Output()
   eventBus: EventEmitter<IApplicationCommand> = new EventEmitter<IApplicationCommand>();

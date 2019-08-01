@@ -28,10 +28,10 @@
     </svg>
     <svg:circle *ngFor="let waypoint of context.waypoints; let $index = index"
       appDraggable
-      (move)="draging($event, $index)"
-      (start)="starDragging()"
-      (drop)="endDragging($event, $index)"
-      [data]="context"
+      (draggableMove)="draging($event, $index)"
+      (draggableStart)="starDragging()"
+      (draggableDrop)="endDragging($event, $index)"
+      [draggableData]="context"
       attr.cx="{{waypoint.x}}"
       attr.cy="{{waypoint.y}}"
       r="5">

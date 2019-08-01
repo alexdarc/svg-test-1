@@ -1,10 +1,8 @@
 import { Injectable } from '@angular/core';
-import { DropContainer } from './DropContainer';
-import { DragObject } from './DragObject';
+import { DropContainer } from '../models/DropContainer';
+import { DragObject } from '../models/DragObject';
 
-@Injectable({
-  providedIn: 'root'
-})
+@Injectable()
 export class DragAndDropService {
   public dropContainer: DropContainer<any, any>;
   public dragObject: DragObject<any> = { data: null };

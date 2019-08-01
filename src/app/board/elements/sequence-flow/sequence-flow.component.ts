@@ -2,21 +2,21 @@ import { Component, Input } from '@angular/core';
 
 import { IProcessComponent } from '../../shared/models/process-component.model';
 import { SequenceFlow } from './sequence-flow.model';
-import { MoveEvent } from 'src/app/shared/DragAndDropModule/DraggableDirective/Events/MoveEvent';
-import { DropEvent } from 'src/app/shared/DragAndDropModule/DraggableDirective/Events/DropEvent';
+import { DraggableMoveEvent } from './../../../shared/modules/drag-and-drop/shared/models/DraggableMoveEvent';
+import { DraggableDropEvent } from './../../../shared/modules/drag-and-drop/shared/models/DraggableDropEvent';
 
 @Component({
   selector: 'svg:svg[app-sequence-flow]',
-  templateUrl:'./sequence-flow.component.html',
+  templateUrl: './sequence-flow.component.html',
   styleUrls: ['./sequence-flow.component.css'],
 })
 export class SequenceFlowComponent implements IProcessComponent {
   @Input()
   context: SequenceFlow;
 
-  private inDragging = false;
+  inDragging = false;
 
-  draging(event: MoveEvent, index: number) {
+  draging(event: DraggableMoveEvent, index: number) {
     this.context.waypoints[index].x = event.offsetX;
     this.context.waypoints[index].y = event.offsetY;
   }
@@ -25,7 +25,7 @@ export class SequenceFlowComponent implements IProcessComponent {
     this.inDragging = true;
   }
 
-  endDragging(event: DropEvent, index: number) {
+  endDragging(event: DraggableDropEvent, index: number) {
     this.inDragging = false;
     if (!event.acceptedDrop) {
       this.context.waypoints[index].x = event.startingPosition.offsetX;
