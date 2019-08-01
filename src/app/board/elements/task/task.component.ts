@@ -4,6 +4,7 @@ import { IProcessComponent } from '../../shared/models/process-component.model';
 import { Task } from './task.model';
 
 @Component({
+  // tslint:disable-next-line: component-selector
   selector: 'svg:svg[app-task]',
   templateUrl: './task.component.html',
   styleUrls: ['./task.component.css'],

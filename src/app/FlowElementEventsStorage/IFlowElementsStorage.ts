@@ -6,6 +6,6 @@ export interface IFlowElementsStorage {
   Push(option: { flowElement: IFlowElement }): void;
   Remove(option: { id: string } ): void;
   Get(): IFlowElement[];
-  GetById(option: { id: string; }): IFlowElement
+  GetById(option: { id: string; }): IFlowElement;
   Update(option: { id: string, update: UpdateInstruction }): void;
 }

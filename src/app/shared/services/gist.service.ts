@@ -32,8 +32,8 @@ interface JSONElement {
   providedIn: 'root'
 })
 export class GistService implements IDatabase {
-  readonly url =
-    'https://gist.githubusercontent.com/alexdarc/092a156b00ed5d5df16a46c4ddc59594/raw/194f732477e0a51a1c58a2e3e7a04810eb83a698/rr-process.json';
+  // tslint:disable-next-line: max-line-length
+  readonly url = 'https://gist.githubusercontent.com/alexdarc/092a156b00ed5d5df16a46c4ddc59594/raw/194f732477e0a51a1c58a2e3e7a04810eb83a698/rr-process.json';
 
   constructor(private http: HttpClient) { }
 
@@ -47,56 +47,56 @@ export class GistService implements IDatabase {
   makeFlowElements(jsonElements: JSONElement[]): IFlowElement[] {
     const result = jsonElements.map((jsonElement) => {
       switch (jsonElement.$type) {
-        case 'tStartEvent':
-          return new StartEvent({
-            id: jsonElement.id,
-            incoming: jsonElement.incoming,
-            outgoing: jsonElement.outgoing,
-            x: jsonElement.x,
-            y: jsonElement.y,
-            width: jsonElement.width,
-            height: jsonElement.height,
-          });
-        case 'tEndEvent':
-          return new EndEvent({
-            id: jsonElement.id,
-            incoming: jsonElement.incoming,
-            outgoing: jsonElement.outgoing,
-            x: jsonElement.x,
-            y: jsonElement.y,
-            width: jsonElement.width,
-            height: jsonElement.height,
-          });
-        case 'tExclusiveGateway':
-          return new Gateway({
-            id: jsonElement.id,
-            incoming: jsonElement.incoming,
-            outgoing: jsonElement.outgoing,
-            x: jsonElement.x,
-            y: jsonElement.y,
-            width: jsonElement.width,
-            height: jsonElement.height,
-          });
-        case 'tTask':
-          return new Task({
-            id: jsonElement.id,
-            incoming: jsonElement.incoming,
-            outgoing: jsonElement.outgoing,
-            x: jsonElement.x,
-            y: jsonElement.y,
-            width: jsonElement.width,
-            height: jsonElement.height,
-          });
-        case 'tSequenceFlow':
-          return new SequenceFlow({
-            id: jsonElement.id,
-            sourceRef: jsonElement.sourceRef,
-            targetRef: jsonElement.targetRef,
-            waypoints: jsonElement.waypoints,
-          });
+      case 'tStartEvent':
+        return new StartEvent({
+          id: jsonElement.id,
+          incoming: jsonElement.incoming,
+          outgoing: jsonElement.outgoing,
+          x: jsonElement.x,
+          y: jsonElement.y,
+          width: jsonElement.width,
+          height: jsonElement.height,
+        });
+      case 'tEndEvent':
+        return new EndEvent({
+          id: jsonElement.id,
+          incoming: jsonElement.incoming,
+          outgoing: jsonElement.outgoing,
+          x: jsonElement.x,
+          y: jsonElement.y,
+          width: jsonElement.width,
+          height: jsonElement.height,
+        });
+      case 'tExclusiveGateway':
+        return new Gateway({
+          id: jsonElement.id,
+          incoming: jsonElement.incoming,
+          outgoing: jsonElement.outgoing,
+          x: jsonElement.x,
+          y: jsonElement.y,
+          width: jsonElement.width,
+          height: jsonElement.height,
+        });
+      case 'tTask':
+        return new Task({
+          id: jsonElement.id,
+          incoming: jsonElement.incoming,
+          outgoing: jsonElement.outgoing,
+          x: jsonElement.x,
+          y: jsonElement.y,
+          width: jsonElement.width,
+          height: jsonElement.height,
+        });
+      case 'tSequenceFlow':
+        return new SequenceFlow({
+          id: jsonElement.id,
+          sourceRef: jsonElement.sourceRef,
+          targetRef: jsonElement.targetRef,
+          waypoints: jsonElement.waypoints,
+        });
 
-        default:
-          throw new Error('JSON element cannot recognized');
+      default:
+        throw new Error('JSON element cannot recognized');
       }
     });
 

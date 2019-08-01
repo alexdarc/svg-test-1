@@ -22,6 +22,7 @@ import { IProcessComponent } from '../shared/models/process-component.model';
 import { IFlowElement } from './../shared/models/flow-element.model';
 
 @Component({
+  // tslint:disable-next-line: component-selector
   selector: 'svg:g[app-event-element]',
   template: `<ng-template #dynamicContainer></ng-template>`,
 

@@ -5,6 +5,7 @@ import { ICoords } from '../../shared/models/coords.model';
 import { Gateway } from './gateway.model';
 
 @Component({
+  // tslint:disable-next-line: component-selector
   selector: 'svg:svg[app-gateway]',
   template: `
     <svg [attr.x]="context.x" [attr.y]="context.y">

@@ -50,6 +50,6 @@ export class ApplicationCommandUndoVisitor
           x: -moveCommand.coords.x,
           y: -moveCommand.coords.y,
         }
-      })
+      });
   }
 }

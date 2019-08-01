@@ -35,13 +35,13 @@ export class ApplicationCommandApplyingVisitor
             width: 100,
             height: 80,
           })
-        }
+      }
       );
   }
 
   public VisitStartEvent(createStartEventCommand: CreateStartEventCommand): void {
     this.flowElementsStorage
-      .Push({ 
+      .Push({
         flowElement:
           new StartEvent({
             id: createStartEventCommand.id,
@@ -52,13 +52,13 @@ export class ApplicationCommandApplyingVisitor
             width: 36,
             height: 36,
           })
-        }
+      }
       );
   }
 
   public VisitEndEvent(createEndEventCommand: CreateEndEventCommand): void {
     this.flowElementsStorage
-      .Push({ 
+      .Push({
         flowElement:
           new EndEvent({
             id: createEndEventCommand.id,
@@ -69,14 +69,14 @@ export class ApplicationCommandApplyingVisitor
             width: 36,
             height: 36,
           })
-        }
+      }
       );
   }
 
   public VisitGateway(createGatewayCommand: CreateGatewayCommand): void {
     this.flowElementsStorage
-      .Push({ 
-          flowElement:
+      .Push({
+        flowElement:
             new Gateway({
               id: createGatewayCommand.id,
               incoming: null,
@@ -86,7 +86,7 @@ export class ApplicationCommandApplyingVisitor
               width: 50,
               height: 50,
             })
-        }
+      }
       );
   }
 
@@ -95,6 +95,6 @@ export class ApplicationCommandApplyingVisitor
       .Handle({
         flowNodeId: moveCommand.id,
         offset: moveCommand.coords
-      })
+      });
   }
 }

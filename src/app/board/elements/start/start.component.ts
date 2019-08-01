@@ -4,6 +4,7 @@ import { IProcessComponent } from '../../shared/models/process-component.model';
 import { StartEvent } from './start-event.model';
 
 @Component({
+  // tslint:disable-next-line: component-selector
   selector: 'svg:svg[app-start]',
   template: `
     <svg [attr.x]="context.x" [attr.y]="context.y">

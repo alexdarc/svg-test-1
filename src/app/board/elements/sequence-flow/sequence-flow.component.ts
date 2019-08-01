@@ -6,6 +6,7 @@ import { DraggableMoveEvent } from './../../../shared/modules/drag-and-drop/shar
 import { DraggableDropEvent } from './../../../shared/modules/drag-and-drop/shared/models/DraggableDropEvent';
 
 @Component({
+  // tslint:disable-next-line: component-selector
   selector: 'svg:svg[app-sequence-flow]',
   templateUrl: './sequence-flow.component.html',
   styleUrls: ['./sequence-flow.component.css'],

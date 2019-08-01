@@ -42,11 +42,9 @@ export class FlowElementsStorage
       );
   }
 
-  public Update(option: { id: string, update: UpdateInstruction }): void
-  {
-    let flowElement: IFlowElement = this.GetById({ id: option.id });
-    for (let key in option.update.set)
-    {
+  public Update(option: { id: string, update: UpdateInstruction }): void {
+    const flowElement: IFlowElement = this.GetById({ id: option.id });
+    for (const key of option.update.set) {
       flowElement[key] = option.update.set[key];
     }
   }

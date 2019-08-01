@@ -7,12 +7,9 @@ import { UndoRedoStateManager } from './UndoRedoStateManager/UndoRedoStateManage
 import { IApplicationCommand } from './ApplicationCommands/IApplicationCommand';
 import { FlowElementsStorage } from './FlowElementEventsStorage/FlowElementsStorage';
 
-import { ApplicationCommandVisitor }
-  from './ApplicationCommands/ApplicationCommandVisitors/ApplicationCommandVisitor';
-import { ApplicationCommandApplyingVisitor }
-  from './ApplicationCommands/ApplicationCommandVisitors/ApplicationCommandApplyingVisitor';
-import { ApplicationCommandUndoVisitor }
-  from './ApplicationCommands/ApplicationCommandVisitors/ApplicationCommandUndoVisitor';
+import { ApplicationCommandVisitor } from './ApplicationCommands/ApplicationCommandVisitors/ApplicationCommandVisitor';
+import { ApplicationCommandApplyingVisitor } from './ApplicationCommands/ApplicationCommandVisitors/ApplicationCommandApplyingVisitor';
+import { ApplicationCommandUndoVisitor } from './ApplicationCommands/ApplicationCommandVisitors/ApplicationCommandUndoVisitor';
 import { MoveFlowNodeCommandHandler } from './BL/MoveFlowNodeCommandHandler';
 
 
