@@ -1,11 +1,11 @@
-import { Position } from './Position';
+import { DraggablePosition } from './draggable-position';
 
 export class DraggableDropEvent {
-  startingPosition: Position;
+  startingPosition: DraggablePosition;
   acceptedDrop: boolean;
 
   constructor(option: {
-    startingPosition: Position,
+    startingPosition: DraggablePosition,
     acceptedDrop: boolean
   }) {
     this.startingPosition = option.startingPosition;

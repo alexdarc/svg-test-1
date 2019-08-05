@@ -1,4 +1,4 @@
-export class DropContainer<T, T1> {
+export class DragAndDropServiceDropContainer<T, T1> {
   predicate: (data: T) => boolean;
   data: T1;
 

@@ -1,4 +1,4 @@
-export class DragObject<T> {
+export class DragAndRopServiceDragObject<T> {
   data: T;
 
   constructor(option: {

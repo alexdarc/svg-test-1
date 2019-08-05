@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { DragDropModule } from '@angular/cdk/drag-drop';
 
 import { BoardComponent } from './board.component';
 import { EventElementComponent } from './event-element/event-element.component';
@@ -10,7 +9,6 @@ import { TaskComponent } from './elements/task/task.component';
 import { EndComponent } from './elements/end/end.component';
 import { SequenceFlowComponent } from './elements/sequence-flow/sequence-flow.component';
 import { CoordsPipe } from './shared/pipes/coords.pipe';
-import { DragDirective } from './shared/directives/drag.directive';
 import { WaypointsPipe } from './shared/pipes/waypoints.pipe';
 import { DragAndDropModule } from './../shared/modules/drag-and-drop/drag-and-drop.module';
 
@@ -24,12 +22,10 @@ import { DragAndDropModule } from './../shared/modules/drag-and-drop/drag-and-dr
     EndComponent,
     SequenceFlowComponent,
     CoordsPipe,
-    DragDirective,
     WaypointsPipe,
   ],
   imports: [
     CommonModule,
-    DragDropModule,
     DragAndDropModule,
   ],
   exports: [BoardComponent],

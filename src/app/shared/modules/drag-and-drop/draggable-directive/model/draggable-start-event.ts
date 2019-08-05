@@ -1,2 +1,5 @@
 export class DraggableStartEvent {
+
+  constructor() {
+  }
 }

@@ -1,4 +1,4 @@
-export class Position {
+export class DraggablePosition {
   offsetX: number;
   offsetY: number;
 

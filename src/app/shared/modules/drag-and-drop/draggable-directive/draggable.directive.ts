@@ -6,12 +6,11 @@ import {
   HostListener,
 } from '@angular/core';
 
-import { DragAndDropService } from '../services/drag-and-drop.service';
-import { DragObject } from '../models/DragObject';
-import { Position } from '../models/Position';
-import { DraggableMoveEvent } from '../models/DraggableMoveEvent';
-import { DraggableStartEvent } from '../models/DraggableStartEvent';
-import { DraggableDropEvent } from '../models/DraggableDropEvent';
+import { DragAndDropService } from '../drag-and-drop-service/drag-and-drop.service';
+import { DraggablePosition } from './model/draggable-position';
+import { DraggableMoveEvent } from './model/draggable-move-event';
+import { DraggableStartEvent } from './model/draggable-start-event';
+import { DraggableDropEvent } from './model/draggable-drop-event';
 
 @Directive({
   selector: '[appDraggable]'
@@ -23,7 +22,7 @@ export class DraggableDirective {
   ) { }
 
   private selected: boolean;
-  private startingPosotion: Position;
+  private startingPosotion: DraggablePosition;
 
   // tslint:disable-next-line: no-input-rename
   @Input('draggableData')
@@ -59,12 +58,9 @@ export class DraggableDirective {
       this.drop
         .emit(new DraggableDropEvent({
           startingPosition: this.startingPosotion,
-          acceptedDrop: (this.dragAndDropService
-            .dropContainer || {predicate: () => false})
-            .predicate(this.data)
+          acceptedDrop: this.dragAndDropService
+            .DropDragObject()
         }));
-      this.dragAndDropService
-        .dragObject = null;
     }
   }
 
@@ -72,11 +68,11 @@ export class DraggableDirective {
   mousedown(event: MouseEvent) {
     this.selected = true;
     this.dragAndDropService
-      .dragObject = new DragObject({
-        data: this.data
+      .StarDragObject({
+        dragObjectData: this.data
       });
 
-    this.startingPosotion = new Position({
+    this.startingPosotion = new DraggablePosition({
       offsetX: event.offsetX,
       offsetY: event.offsetY
     });
