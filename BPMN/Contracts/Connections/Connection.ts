@@ -9,3 +9,6 @@ class MessageFlow extends Connection {
 
 class Association extends Connection {
 }
+
+class DataAssociation extends Connection {
+}
