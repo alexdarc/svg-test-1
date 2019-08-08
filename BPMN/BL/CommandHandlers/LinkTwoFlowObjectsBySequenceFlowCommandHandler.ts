@@ -15,6 +15,7 @@ class LinkTwoFlowObjectsBySequenceFlowCommandHandler
     this.flowObjectMapper = flowObjectMapper;
   }
 
+  // todo: it should be a transaction
   Handle(command: {
     flowObjectIdFrom: string;
     flowObjectIdTo: string }): void {
