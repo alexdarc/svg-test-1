@@ -4,12 +4,16 @@
 >
   <g
     app-event-element
-    *ngFor="let flowElement of state"
+    *ngFor="let flowElement of flowNodes"
     [flowElement]="flowElement"
-
-    appDrag
-    [appDragData]="flowElement.id"
-    (appDragReleased)="onRelease($event)"
+    appDropContainer
+    [dropContainerPredicate]="flowNodeDropPredicate"
   >
   </g>
+
+  <svg
+    app-sequence-flow
+    *ngFor="let sequenceFlow of sequenceFlows"
+    [context]="sequenceFlow">
+  </svg>
 </svg>

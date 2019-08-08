@@ -1,46 +1,35 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input } from '@angular/core';
 
 import { IProcessComponent } from '../../shared/models/process-component.model';
 import { SequenceFlow } from './sequence-flow.model';
+import { DraggableMoveEvent } from './../../../shared/modules/drag-and-drop/draggable-directive/model/draggable-move-event';
+import { DraggableDropEvent } from './../../../shared/modules/drag-and-drop/draggable-directive/model/draggable-drop-event';
 
 @Component({
   selector: 'svg:svg[app-sequence-flow]',
-  template: `
-    <svg>
-      <defs>
-        <marker
-          id="flow-end"
-          viewBox="0 0 20 20"
-          refX="11"
-          refY="10"
-          markerWidth="10"
-          markerHeight="10"
-          orient="auto"
-        >
-          <path class="marker" d="M 1 5 L 11 10 L 1 15 Z"></path>
-        </marker>
-      </defs>
-      <path class="line" attr.d="m {{ context.waypoints | waypoints }} "></path>
-    </svg>
-  `,
-  styles: [`
-    .line {
-      fill: none;
-      stroke-width: 2px;
-      stroke: black;
-      stroke-linejoin: round;
-      marker-end: url('#flow-end');
-    }
-
-    .marker {
-      fill: black;
-      stroke-width: 1px;
-      stroke-linecap: round;
-      stroke-dasharray: 10000, 1;
-      stroke: black;
-    }
-  `],
+  templateUrl: './sequence-flow.component.html',
+  styleUrls: ['./sequence-flow.component.css'],
 })
 export class SequenceFlowComponent implements IProcessComponent {
+  @Input()
   context: SequenceFlow;
+
+  inDragging = false;
+
+  draging(event: DraggableMoveEvent, index: number) {
+    this.context.waypoints[index].x = event.offsetX;
+    this.context.waypoints[index].y = event.offsetY;
+  }
+
+  starDragging() {
+    this.inDragging = true;
+  }
+
+  endDragging(event: DraggableDropEvent, index: number) {
+    this.inDragging = false;
+    if (!event.acceptedDrop) {
+      this.context.waypoints[index].x = event.startingPosition.offsetX;
+      this.context.waypoints[index].y = event.startingPosition.offsetY;
+    }
+  }
 }

@@ -1,0 +1,31 @@
+.line {
+    fill: none;
+    stroke-width: 2px;
+    stroke: black;
+    stroke-linejoin: round;
+  }
+
+  .marker {
+    fill: black;
+    stroke-width: 1px;
+    stroke-linecap: round;
+    stroke-dasharray: 10000, 1;
+    stroke: black;
+  }
+
+  circle
+  {
+  }
+
+  svg:hover circle {
+    display:block;
+    stroke: black;
+    stroke-width: 1px;
+    fill: yellow;
+    fill-opacity: 0.5;
+    z-index: 99;
+  }
+
+  svg:hover circle:hover {
+    fill-opacity: 1;
+  }

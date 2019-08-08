@@ -1,10 +1,12 @@
 import { Component, Input, ViewEncapsulation, Output, EventEmitter } from '@angular/core';
 
-import { DragData } from './shared/directives/drag.directive';
 import { IFlowElement } from './shared/models/flow-element.model';
 import { IApplicationCommand } from '../ApplicationCommands/IApplicationCommand';
 import { CreateTaskCommand } from '../ApplicationCommands/CreateTaskCommand';
 import { MoveCommand } from '../ApplicationCommands/MoveCommand';
+import { Point } from '@angular/cdk/drag-drop/typings/drag-ref';
+import { FlowNode } from './shared/models/flow-node.model';
+import { SequenceFlow } from './elements/sequence-flow/sequence-flow.model';
 
 @Component({
   selector: 'app-board',
@@ -16,7 +18,16 @@ import { MoveCommand } from '../ApplicationCommands/MoveCommand';
 export class BoardComponent {
 
   @Input()
-  state: IFlowElement[];
+  set state(value: IFlowElement[]) {
+    this.flowNodes = value.filter(e => e instanceof FlowNode)
+      .map(e => e as FlowNode);
+
+    this.sequenceFlows = value.filter(e => e instanceof SequenceFlow)
+      .map(e => e as SequenceFlow);
+  }
+
+  flowNodes: FlowNode[];
+  sequenceFlows: SequenceFlow[];
 
   @Output()
   eventBus: EventEmitter<IApplicationCommand> = new EventEmitter<IApplicationCommand>();
@@ -33,12 +44,16 @@ export class BoardComponent {
     );
   }
 
-  onRelease(dragData: DragData<string>) {
+  onRelease(options: { flowElementId: string, coords: Point }) {
     this.eventBus.emit(
       new MoveCommand(
-        dragData.data,
-        dragData.coords
+        options.flowElementId,
+        options.coords
       )
     );
+  }
+
+  flowNodeDropPredicate(data: any): boolean {
+    return data != null;
   }
 }

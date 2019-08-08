@@ -13,11 +13,6 @@ import { Point } from '@angular/cdk/drag-drop/typings/drag-ref';
 
 import { Subscription } from 'rxjs';
 
-export interface DragData<T> {
-  data: T;
-  coords: Point;
-}
-
 @Directive({
   selector: '[appDrag]'
 })
@@ -36,7 +31,7 @@ export class DragDirective<T = any> implements AfterViewInit, OnDestroy {
   };
 
   @Input() appDragData: T;
-  @Output() appDragReleased: EventEmitter<DragData<T>> = new EventEmitter<DragData<T>>();
+  @Output() appDragReleased: EventEmitter<Point> = new EventEmitter<Point>();
 
   constructor(
     private el: ElementRef,
@@ -85,10 +80,7 @@ export class DragDirective<T = any> implements AfterViewInit, OnDestroy {
     });
 
     this.releasedSub = this.dragRef.released.subscribe(() => {
-      this.appDragReleased.emit({
-        data: this.appDragData,
-        coords: this.distance,
-      });
+      this.appDragReleased.emit(this.distance);
 
       this.renderer.removeClass(
         this.el.nativeElement,
