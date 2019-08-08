@@ -50,7 +50,7 @@ export class DropContainerDirective {
   @HostListener('mouseout')
   mouseout() {
     this.dragAndDropService
-      .DropContainerDrop();
+      .DropContainerEmpty();
   }
 
   @HostListener('mouseup')

@@ -61,6 +61,7 @@ export class DraggableDirective {
           acceptedDrop: this.dragAndDropService
             .DropDragObject()
         }));
+      this.dragAndDropService.EmptyDragObject();
     }
   }
 

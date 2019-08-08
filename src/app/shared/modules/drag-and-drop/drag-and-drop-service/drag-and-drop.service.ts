@@ -26,6 +26,10 @@ export class DragAndDropService {
     return false;
   }
 
+  public DropContainerEmpty(): void {
+    this.dropContainer = null;
+  }
+
   public StarDragObject(option: {
     dragObjectData: any
   }): void {
@@ -41,6 +45,10 @@ export class DragAndDropService {
     }
 
     return false;
+  }
+
+  public EmptyDragObject(): void {
+    this.dragObject = null;
   }
 
 }
