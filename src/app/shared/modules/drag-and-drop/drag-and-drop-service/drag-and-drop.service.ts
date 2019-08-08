@@ -1,3 +1,4 @@
+import { FlowNode } from './../../../../board/shared/models/flow-node.model';
 import { Injectable } from '@angular/core';
 import { DragAndDropServiceDropContainer } from './model/drag-and-drop-service-drop-container';
 import { DragAndRopServiceDragObject } from './model/drag-and-drop-service-drag-object';
@@ -45,6 +46,18 @@ export class DragAndDropService {
     }
 
     return false;
+  }
+
+  public GetDragObject(): DragAndRopServiceDragObject<any> {
+    return this.dragObject;
+  }
+
+  public GetDropContainerData(): any {
+    if (this.dropContainer) {
+      return this.dropContainer.data;
+    }
+
+    return null;
   }
 
   public EmptyDragObject(): void {

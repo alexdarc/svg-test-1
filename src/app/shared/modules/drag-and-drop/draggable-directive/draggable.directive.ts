@@ -46,7 +46,8 @@ export class DraggableDirective {
       this.move
         .emit(new DraggableMoveEvent({
           offsetX: event.offsetX,
-          offsetY: event.offsetY
+          offsetY: event.offsetY,
+          data: this.dragAndDropService.GetDropContainerData(),
         }));
     }
   }

@@ -7,6 +7,7 @@
     *ngFor="let flowElement of flowNodes"
     [flowElement]="flowElement"
     appDropContainer
+    [dropContainerData]="flowElement"
     [dropContainerPredicate]="flowNodeDropPredicate"
   >
   </g>

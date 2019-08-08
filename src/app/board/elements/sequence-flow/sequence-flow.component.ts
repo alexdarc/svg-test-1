@@ -4,6 +4,7 @@ import { IProcessComponent } from '../../shared/models/process-component.model';
 import { SequenceFlow } from './sequence-flow.model';
 import { DraggableMoveEvent } from './../../../shared/modules/drag-and-drop/draggable-directive/model/draggable-move-event';
 import { DraggableDropEvent } from './../../../shared/modules/drag-and-drop/draggable-directive/model/draggable-drop-event';
+import { IntersectionTool } from '../../../IntersectionTool/IntersectionTool';
 
 @Component({
   selector: 'svg:svg[app-sequence-flow]',
@@ -19,6 +20,18 @@ export class SequenceFlowComponent implements IProcessComponent {
   draging(event: DraggableMoveEvent, index: number) {
     this.context.waypoints[index].x = event.offsetX;
     this.context.waypoints[index].y = event.offsetY;
+
+    if (event.data) {
+      const intersections = IntersectionTool.getIntersection(
+        IntersectionTool.getPath(this.context),
+        IntersectionTool.getPath(event.data),
+      );
+
+      if (intersections.length > 0) {
+        this.context.waypoints[index].x = intersections[0].x;
+        this.context.waypoints[index].y = intersections[0].y;
+      }
+    }
   }
 
   starDragging() {
@@ -31,5 +44,9 @@ export class SequenceFlowComponent implements IProcessComponent {
       this.context.waypoints[index].x = event.startingPosition.offsetX;
       this.context.waypoints[index].y = event.startingPosition.offsetY;
     }
+
+    // const path0 = 'M150,150L150,200';
+    // const path1 = 'M150,150m0,-18a18,18,0,1,1,0,36a18,18,0,1,1,0,-36z';
+    // console.log(IntersectionTool.getIntersection(path0, path1));
   }
 }
