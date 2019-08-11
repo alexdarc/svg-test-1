@@ -52,9 +52,9 @@
 
     <svg:circle
       appDraggable
-      (draggableMove)="draging($event, 0)"
+      (draggableMove)="draging($event, sequenceFlow.waypoints.length - 1)"
       (draggableStart)="starDragging()"
-      (draggableDrop)="endDragging($event, 0)"
+      (draggableDrop)="endDragging($event, sequenceFlow.waypoints.length - 1)"
       [draggableData]="sequenceFlow"
       attr.cx="{{endWaypoint.x}}"
       attr.cy="{{endWaypoint.y}}"

@@ -43,17 +43,4 @@ export class BoardComponent {
       )
     );
   }
-
-  onRelease(options: { flowElementId: string, coords: Point }) {
-    this.eventBus.emit(
-      new MoveCommand(
-        options.flowElementId,
-        options.coords
-      )
-    );
-  }
-
-  flowNodeDropPredicate(data: any): boolean {
-    return data != null;
-  }
 }

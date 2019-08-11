@@ -19,7 +19,7 @@ export class DragAndDropService {
       );
     }
 
-    return false;
+    return null;
   }
 
   public DropContainerDrop(): boolean {

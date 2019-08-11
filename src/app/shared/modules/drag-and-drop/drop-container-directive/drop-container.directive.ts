@@ -22,8 +22,8 @@ export class DropContainerDirective {
   ) {}
 
   // tslint:disable-next-line: no-output-rename
-  @Output('dropContainerEnter')
-  enter: EventEmitter<DropContainerOverEvent> = new EventEmitter<DropContainerOverEvent>();
+  @Output('dropContainerOver')
+  over: EventEmitter<DropContainerOverEvent> = new EventEmitter<DropContainerOverEvent>();
 
   // tslint:disable-next-line: no-output-rename
   @Output('dropContainerOut')
@@ -58,7 +58,7 @@ export class DropContainerDirective {
           data: this.data
         })});
 
-    this.enter
+    this.over
       .emit(new DropContainerOverEvent({
         accepted
       }));

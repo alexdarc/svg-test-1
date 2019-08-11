@@ -1,0 +1,14 @@
+<svg:g
+  app-event-element
+  [flowElement]="context"
+  appDropContainer
+  [dropContainerPredicate]="flowNodeDropPredicate"
+  [dropContainerData]="context"
+  (dropContainerOver)="over($event)"
+  (dropContainerOut)="out()"
+  [ngClass]="{
+    'is-ok': isOk === true,
+    'is-not-ok': isOk === false
+  }"
+>
+</svg:g>
