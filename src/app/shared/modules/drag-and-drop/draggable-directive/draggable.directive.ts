@@ -55,11 +55,13 @@ export class DraggableDirective {
   mouseup() {
     if (this.selected) {
       this.selected = false;
+      const acceptedDrop = this.dragAndDropService
+        .DropDragObject();
+
       this.drop
         .emit(new DraggableDropEvent({
           startingPosition: this.startingPosotion,
-          acceptedDrop: this.dragAndDropService
-            .DropDragObject()
+          acceptedDrop
         }));
     }
   }
@@ -68,7 +70,7 @@ export class DraggableDirective {
   mousedown(event: MouseEvent) {
     this.selected = true;
     this.dragAndDropService
-      .StarDragObject({
+      .StarDraggingObject({
         dragObjectData: this.data
       });
 

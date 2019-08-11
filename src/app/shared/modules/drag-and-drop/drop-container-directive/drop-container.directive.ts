@@ -7,8 +7,11 @@ import {
 } from '@angular/core';
 import { DragAndDropService } from '../drag-and-drop-service/drag-and-drop.service';
 import { DropContainerOutEvent } from './model/drop-container-out-event';
-import { DropContainerEnterEvent } from './model/drop-container-enter-event';
+import { DropContainerOverEvent } from './model/drop-container-over-event';
 import { DropContainerDropEvent } from './model/drop-container-drop-event';
+import { DragAndDropServiceDragObjectContex } from '../drag-and-drop-service/model/drag-and-drop-service-drag-object-contex';
+import { DragAndDropServiceDropContainerContext } from '../drag-and-drop-service/model/drag-and-drop-service-drop-container-contex';
+import { DragAndDropServiceDragContainerDropEvent } from '../drag-and-drop-service/model/drag-and-drop-service-drag-container-drop-event';
 
 @Directive({
   selector: '[appDropContainer]'
@@ -20,7 +23,7 @@ export class DropContainerDirective {
 
   // tslint:disable-next-line: no-output-rename
   @Output('dropContainerEnter')
-  enter: EventEmitter<DropContainerEnterEvent> = new EventEmitter<DropContainerEnterEvent>();
+  enter: EventEmitter<DropContainerOverEvent> = new EventEmitter<DropContainerOverEvent>();
 
   // tslint:disable-next-line: no-output-rename
   @Output('dropContainerOut')
@@ -40,28 +43,46 @@ export class DropContainerDirective {
 
   @HostListener('mouseover')
   mouseover() {
-    this.dragAndDropService
-      .DropContainerOver({
-        containerPredicate: this.predicate,
-        containerData: this.data
-      });
+    const accepted = this.dragAndDropService
+      .OverDropContainer({
+        dropContainer: new DragAndDropServiceDropContainerContext({
+          predicate: this.predicate,
+          dropEvent: (option: {
+            event: DragAndDropServiceDragContainerDropEvent
+          }) => {
+            this.dropEvent({
+              dragObject: option.event.dropObject,
+              accepted: option.event.accepted
+            });
+          },
+          data: this.data
+        })});
+
+    this.enter
+      .emit(new DropContainerOverEvent({
+        accepted
+      }));
+
   }
 
   @HostListener('mouseout')
   mouseout() {
     this.dragAndDropService
-      .DropContainerDrop();
+      .OutDropContainer();
+
+    this.out
+      .emit(
+        new DropContainerOutEvent());
   }
 
-  @HostListener('mouseup')
-  mouseup() {
-    this.drop.emit(
-      new DropContainerDropEvent({
-        acceptedDrop: this.predicate(
-          this.dragAndDropService
-            .DropContainerDrop()
-        )
-      })
-    );
+  dropEvent(option: {
+    dragObject: DragAndDropServiceDragObjectContex,
+    accepted: boolean
+  }) {
+    this.drop
+      .emit(new DropContainerDropEvent({
+        acceptedDrop: option.accepted,
+        dragObjectData: option.dragObject.data
+      }));
   }
 }
