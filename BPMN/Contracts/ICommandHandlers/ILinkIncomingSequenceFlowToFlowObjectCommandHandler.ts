@@ -1,5 +1,5 @@
-interface ILinkIncomingSequenceFlowToFlowObjectCommandHandler{
+interface ILinkIncomingSequenceFlowToFlowObjectCommandHandler {
   Handle(command: {
     sequenceFlowId: string,
-    flowObjectId: string}) : void;
+    flowObjectId: string}): void;
 }

@@ -1,9 +1,9 @@
-import {ISequenceFlowMapper} from "../Mappers/ISequenceFlowMapper";
-import {IFlowObjectMapper} from "../Mappers/IFlowObjectMapper";
-import {UpdateInstruction} from "../UpdateInstruction";
+import {ISequenceFlowMapper} from '../Mappers/ISequenceFlowMapper';
+import {IFlowObjectMapper} from '../Mappers/IFlowObjectMapper';
+import {UpdateInstruction} from '../UpdateInstruction';
 
 class LinkOutgoingSequenceFlowFromFlowObjectCommandHandler
-  implements ILinkOutgoingSequenceFlowFromFlowObjectCommandHandler{
+  implements ILinkOutgoingSequenceFlowFromFlowObjectCommandHandler {
 
   private readonly sequenceFlowMapper: ISequenceFlowMapper;
   private readonly flowObjectMapper: IFlowObjectMapper;
@@ -22,8 +22,8 @@ class LinkOutgoingSequenceFlowFromFlowObjectCommandHandler
     const sequenceFlow = this.sequenceFlowMapper.GetById(command.sequenceFlowId);
     const flowObject = this.flowObjectMapper.GetById(command.flowObjectId);
 
-    let canLink = SequenceFlowConnectionRules.CanLinkOutgoingSequenceFlow({
-      flowObject: flowObject});
+    const canLink = SequenceFlowConnectionRules.CanLinkOutgoingSequenceFlow({
+      flowObject});
 
     if (!canLink) {
       throw Error(`Can't link sequenceFlow: ${command.sequenceFlowId} with flowObject: ${command.flowObjectId}.`)
