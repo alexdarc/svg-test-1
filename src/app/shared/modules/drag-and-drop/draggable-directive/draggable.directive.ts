@@ -11,6 +11,10 @@ import { DraggablePosition } from './model/draggable-position';
 import { DraggableMoveEvent } from './model/draggable-move-event';
 import { DraggableStartEvent } from './model/draggable-start-event';
 import { DraggableDropEvent } from './model/draggable-drop-event';
+import {DragAndDropServiceDragObjectContext} from "../drag-and-drop-service/model/drag-and-drop-service-drag-object-context";
+import {DragAndDropServiceDragObjectDropEvent} from "../drag-and-drop-service/model/drag-and-drop-service-drag-object-drop-event";
+import {DropContainerDropEvent} from "../drop-container-directive/model/drop-container-drop-event";
+import {DragAndDropServiceDropContainerContext} from "../drag-and-drop-service/model/drag-and-drop-service-drop-container-context";
 
 @Directive({
   selector: '[appDraggable]'
@@ -55,15 +59,21 @@ export class DraggableDirective {
   mouseup() {
     if (this.selected) {
       this.selected = false;
-      const acceptedDrop = this.dragAndDropService
+      this.dragAndDropService
         .DropDragObject();
-
-      this.drop
-        .emit(new DraggableDropEvent({
-          startingPosition: this.startingPosotion,
-          acceptedDrop
-        }));
     }
+  }
+
+  dropEvent(option: {
+    containerContext: DragAndDropServiceDropContainerContext,
+    accepted: boolean
+  }) {
+    this.drop
+      .emit(new DraggableDropEvent({
+        startingPosition: this.startingPosotion,
+        acceptedDrop: option.accepted,
+        data: option.containerContext.data
+      }));
   }
 
   @HostListener('mousedown', ['$event'])
@@ -71,7 +81,16 @@ export class DraggableDirective {
     this.selected = true;
     this.dragAndDropService
       .StarDraggingObject({
-        dragObjectData: this.data
+        dragObjectContext: new DragAndDropServiceDragObjectContext({
+          dropEvent: (option: {
+            event: DragAndDropServiceDragObjectDropEvent
+          }) => {
+              this.dropEvent({
+              containerContext: option.event.containerContext,
+              accepted: option.event.accepted
+            })},
+          data: this.data
+        })
       });
 
     this.startingPosotion = new DraggablePosition({

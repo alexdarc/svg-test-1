@@ -1,4 +1,3 @@
-import { DragAndDropServiceDragObjectContex } from './drag-and-drop-service-drag-object-contex';
 import { DragAndDropServiceDragContainerDropEvent } from './drag-and-drop-service-drag-container-drop-event';
 
 export class DragAndDropServiceDropContainerContext {

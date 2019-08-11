@@ -1,4 +1,5 @@
 import {UpdateInstruction} from "../UpdateInstruction";
+import {FlowObject} from "../../Contracts/Models/FlowObjects/FlowObject";
 
 export interface IFlowObjectMapper {
   Insert(flowObject: FlowObject) : void;

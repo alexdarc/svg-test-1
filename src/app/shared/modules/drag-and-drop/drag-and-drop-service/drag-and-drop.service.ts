@@ -1,20 +1,21 @@
 import { Injectable } from '@angular/core';
-import { DragAndDropServiceDragObjectContex } from './model/drag-and-drop-service-drag-object-contex';
-import { DragAndDropServiceDropContainerContext } from './model/drag-and-drop-service-drop-container-contex';
+import { DragAndDropServiceDragObjectContext } from './model/drag-and-drop-service-drag-object-context';
+import { DragAndDropServiceDropContainerContext } from './model/drag-and-drop-service-drop-container-context';
+import {DragAndDropServiceDragObjectDropEvent} from "./model/drag-and-drop-service-drag-object-drop-event";
 
 @Injectable()
 export class DragAndDropService {
-  private dropContainer: DragAndDropServiceDropContainerContext;
-  private dragObject: DragAndDropServiceDragObjectContex;
+  private dropContainerContext: DragAndDropServiceDropContainerContext;
+  private dragObjectContext: DragAndDropServiceDragObjectContext;
 
   public OverDropContainer(option: {
     dropContainer: DragAndDropServiceDropContainerContext
   }): boolean {
-    this.dropContainer = option.dropContainer;
+    this.dropContainerContext = option.dropContainer;
 
-    if (this.dragObject != null) {
-      return this.dropContainer.predicate(
-        this.dragObject.data
+    if (this.dragObjectContext != null) {
+      return this.dropContainerContext.predicate(
+        this.dragObjectContext.data
       );
     }
 
@@ -23,35 +24,36 @@ export class DragAndDropService {
 
   public DropContainerDrop(): boolean {
     let acceptedDrop = false;
-    if (this.dragObject) {
-      acceptedDrop = this.dropContainer
-        .predicate(this.dragObject.data);
+    if (this.dragObjectContext) {
+      acceptedDrop = this.dropContainerContext
+        .predicate(this.dragObjectContext.data);
     }
 
-    this.dropContainer = null;
+    this.dropContainerContext = null;
     return acceptedDrop;
   }
 
   public OutDropContainer(): void {
-    this.dropContainer = null;
+    this.dropContainerContext = null;
   }
 
   public StarDraggingObject(option: {
-    dragObjectData: any
+    dragObjectContext: DragAndDropServiceDragObjectContext
   }): void {
-    this.dragObject = new DragAndDropServiceDragObjectContex({
-      data: option.dragObjectData
-    });
+    this.dragObjectContext = option.dragObjectContext;
   }
 
-  public DropDragObject(): boolean {
+  public DropDragObject(): void {
     let acceptedDrop = false;
-    if (this.dropContainer) {
-      acceptedDrop = this.dropContainer
-        .predicate(this.dragObject.data);
+    if (this.dropContainerContext) {
+      acceptedDrop = this.dropContainerContext
+        .predicate(this.dragObjectContext.data);
     }
-    this.dragObject = null;
-    return acceptedDrop;
+    this.dragObjectContext.dropEvent({event:new DragAndDropServiceDragObjectDropEvent({
+        containerContext: this.dropContainerContext,
+        accepted: acceptedDrop
+      })});
+    this.dragObjectContext = null;
   }
 }
 

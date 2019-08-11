@@ -1,7 +1,10 @@
 // This is not complete model of BPMN events. For additional details check: https://en.wikipedia.org/wiki/Business_Process_Model_and_Notation#Comparison_of_BPMN_versions
 // @ts-ignore
 // todo: choose better name
-class BPMNEvent extends FlowObject {
+import {EventType} from "./EventType";
+import {FlowObject} from "../FlowObject";
+
+export class BPMNEvent extends FlowObject {
   public readonly EventType: EventType;
 
   constructor(option: {

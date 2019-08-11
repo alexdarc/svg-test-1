@@ -30,7 +30,7 @@
       appDraggable
       (draggableMove)="draging($event, 0)"
       (draggableStart)="starDragging()"
-      (draggableDrop)="endDragging($event, 0)"
+      (draggableDrop)="endDraggingOutgoingPoint($event)"
       [draggableData]="sequenceFlow"
       attr.cx="{{startWaypoint.x}}"
       attr.cy="{{startWaypoint.y}}"

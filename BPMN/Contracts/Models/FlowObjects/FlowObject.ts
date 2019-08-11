@@ -1,4 +1,4 @@
-class FlowObject {
+export class FlowObject {
   public readonly Id: string;
   public readonly IncomingIds: string[];
   public readonly OutgoingIds: string[];

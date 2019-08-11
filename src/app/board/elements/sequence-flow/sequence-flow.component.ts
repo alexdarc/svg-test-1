@@ -5,6 +5,7 @@ import { SequenceFlow } from './sequence-flow.model';
 import { DraggableMoveEvent } from './../../../shared/modules/drag-and-drop/draggable-directive/model/draggable-move-event';
 import { DraggableDropEvent } from './../../../shared/modules/drag-and-drop/draggable-directive/model/draggable-drop-event';
 import { ICoords } from '../../shared/models/coords.model';
+import {DependencyContainer} from "../../../DependencyContainer";
 
 @Component({
   selector: 'svg:svg[app-sequence-flow]',
@@ -14,8 +15,11 @@ import { ICoords } from '../../shared/models/coords.model';
 export class SequenceFlowComponent implements IProcessComponent {
   private sequenceFlow: SequenceFlow;
   private startWaypoint: ICoords;
-  private intermediateWaypoints: ICoords[] = [];
+  private intermediateWaypoints: ICoords[];
   private endWaypoint: ICoords;
+
+  constructor(private dependencyContainer: DependencyContainer){
+  }
 
 
   @Input()
@@ -40,8 +44,17 @@ export class SequenceFlowComponent implements IProcessComponent {
     this.inDragging = true;
   }
 
-  endDraggingOutgoingPoint(): void {
-
+  endDraggingOutgoingPoint(event: DraggableDropEvent): void {
+    const accepted = this.dependencyContainer
+      .canLinkOutgoingSequenceFlowToFlowObjectQueryHandler
+      .Handle({
+        flowObjectId: event.data.id
+        });
+    if (!accepted) {
+      this.sequenceFlow.waypoints[0].x = event.startingPosition.offsetX;
+      this.sequenceFlow.waypoints[0].y = event.startingPosition.offsetY;
+    }
+    this.inDragging = false;
   }
 
   endDragging(event: DraggableDropEvent, index: number) {

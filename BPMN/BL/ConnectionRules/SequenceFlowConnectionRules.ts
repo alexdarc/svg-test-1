@@ -1,4 +1,8 @@
-class SequenceFlowConnectionRules {
+import {FlowObject} from "../../Contracts/Models/FlowObjects/FlowObject";
+import {BPMNEvent} from "../../Contracts/Models/FlowObjects/Events/Event";
+import {EventType} from "../../Contracts/Models/FlowObjects/Events/EventType";
+
+export class SequenceFlowConnectionRules {
 
   public static CanLinkIncomingSequenceFlow(
     option: {

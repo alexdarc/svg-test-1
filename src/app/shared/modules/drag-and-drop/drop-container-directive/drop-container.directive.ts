@@ -9,8 +9,8 @@ import { DragAndDropService } from '../drag-and-drop-service/drag-and-drop.servi
 import { DropContainerOutEvent } from './model/drop-container-out-event';
 import { DropContainerOverEvent } from './model/drop-container-over-event';
 import { DropContainerDropEvent } from './model/drop-container-drop-event';
-import { DragAndDropServiceDragObjectContex } from '../drag-and-drop-service/model/drag-and-drop-service-drag-object-contex';
-import { DragAndDropServiceDropContainerContext } from '../drag-and-drop-service/model/drag-and-drop-service-drop-container-contex';
+import { DragAndDropServiceDragObjectContext } from '../drag-and-drop-service/model/drag-and-drop-service-drag-object-context';
+import { DragAndDropServiceDropContainerContext } from '../drag-and-drop-service/model/drag-and-drop-service-drop-container-context';
 import { DragAndDropServiceDragContainerDropEvent } from '../drag-and-drop-service/model/drag-and-drop-service-drag-container-drop-event';
 
 @Directive({
@@ -39,7 +39,7 @@ export class DropContainerDirective {
 
   // tslint:disable-next-line: no-input-rename
   @Input('dropContainerPredicate')
-  predicate: (data: any) => boolean = () => false
+  predicate: (data: any) => boolean = () => false;
 
   @HostListener('mouseover')
   mouseover() {
@@ -51,7 +51,7 @@ export class DropContainerDirective {
             event: DragAndDropServiceDragContainerDropEvent
           }) => {
             this.dropEvent({
-              dragObject: option.event.dropObject,
+              dragObject: option.event.dragObjectContext,
               accepted: option.event.accepted
             });
           },
@@ -76,7 +76,7 @@ export class DropContainerDirective {
   }
 
   dropEvent(option: {
-    dragObject: DragAndDropServiceDragObjectContex,
+    dragObject: DragAndDropServiceDragObjectContext,
     accepted: boolean
   }) {
     this.drop
