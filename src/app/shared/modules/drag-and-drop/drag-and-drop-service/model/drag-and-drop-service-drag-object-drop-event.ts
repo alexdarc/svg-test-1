@@ -1,14 +1,12 @@
-import {DragAndDropServiceDropContainerContext} from "./drag-and-drop-service-drop-container-context";
-
 export class DragAndDropServiceDragObjectDropEvent {
-  public readonly containerContext: DragAndDropServiceDropContainerContext;
+  public readonly dropContainerData: any;
   public readonly accepted: boolean;
 
   constructor(option: {
-    containerContext: DragAndDropServiceDropContainerContext,
+    dropContainerData: any,
     accepted: boolean
   }) {
-    this.containerContext = option.containerContext;
+    this.dropContainerData = option.dropContainerData;
     this.accepted = option.accepted;
   }
 }
