@@ -47,6 +47,6 @@ export class FlowNodeComponent {
   }
 
   over(event: DropContainerOverEvent) {
-    this.isOk = event.accepted;
+    this.isOk = event.acceptableDrop;
   }
 }

@@ -1,7 +1,6 @@
-export class DragAndDropServiceDragObjectMoveEvent
-{
-  public readonly offsetY: number;
+export class DraggableDragEvent {
   public readonly offsetX: number;
+  public readonly offsetY: number;
   
   constructor(option: {
     offsetX: number,

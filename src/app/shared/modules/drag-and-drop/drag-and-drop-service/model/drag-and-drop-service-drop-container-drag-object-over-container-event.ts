@@ -1,4 +1,4 @@
-export class DropContainerOverEvent {
+export class DragAndDropServiceDropContainerDragOverEvent {
   public readonly acceptableDrop: boolean;
   public readonly dragObjectData: any;
 

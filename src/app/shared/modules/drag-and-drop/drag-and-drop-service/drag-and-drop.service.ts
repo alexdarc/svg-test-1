@@ -1,21 +1,21 @@
-import { Injectable, HostListener } from '@angular/core';
-import { DragAndDropServiceDragObjectContext } from './model/drag-and-drop-service-drag-object-context';
-import { DragAndDropServiceDropContainerContext } from './model/drag-and-drop-service-drop-container-context';
-import {DragAndDropServiceDragObjectDropEvent} from "./model/drag-and-drop-service-drag-object-drop-event";
-import { DragAndDropServiceDragContainerDropEvent } from './model/drag-and-drop-service-drag-container-drop-event';
-import { DragAndDropServiceDragContainerDragOverEvent } from './model/drag-and-drop-service-drag-container-drag-over-event';
-import { DragAndDropServiceDragObjectMoveEvent } from './model/drag-and-drop-service-drag-object-move-event';
-import { DragAndDropServiceDragContainerOutEvent } from './model/drag-and-drop-service-drag-container-out-event';
+import { Injectable } from '@angular/core';
+import { DragAndDropServiceDragAndDropContainerContext as DropContainerContext} from './model/drag-and-drop-service-drop-conatiner-context';
+import { DragAndDropServiceDropObjectContext as DragObjectContext} from './model/drag-and-drop-service-drop-object-context';
+import { DragAndDropServiceDraggingDropEvent } from './model/drag-and-drop-service-dragging-drop-event';
+import { DragAndDropPosition } from '../drag-and-drop-positon';
+import { DragAndDropServiceDraggingDragEvent } from './model/drag-and-drop-service-dragging-dragging-event';
+import { DragAndDropServiceDropContainerDragOverEvent } from './model/drag-and-drop-service-drop-container-drag-object-over-container-event';
 
 @Injectable()
 export class DragAndDropService {
-  private dropContainerContext: DragAndDropServiceDropContainerContext;
-  private dragObjectContext: DragAndDropServiceDragObjectContext;
+
+  private dropContainerContext: DropContainerContext;
+  private dragObjectContext: DragObjectContext;
 
   constructor() {
     window.addEventListener(
       'mouseup',
-      () => this.mouseup()
+      (event) => this.mouseup(event)
     );
     
     window.addEventListener(
@@ -25,99 +25,70 @@ export class DragAndDropService {
     });
   }
 
-  public OverDropContainer(option: {
-    dropContainerContext: DragAndDropServiceDropContainerContext
-  }): void {
-    this.dropContainerContext = option.dropContainerContext;
-
-    const dragObjectContext = this.dragObjectContext;
-    if (dragObjectContext != null) {
-      this.dropContainerContext
-        .dragOverEvent({
-          event: new DragAndDropServiceDragContainerDragOverEvent({
-            accepted: this.dropContainerContext
-              .predicate(dragObjectContext.data),
-            dragObjectData: dragObjectContext.data
-          })
-        })
-    }
+  startDragging(dragObjectContext: DragObjectContext) {
+    this.dragObjectContext = dragObjectContext;
   }
 
-  public DropContainerDrop(): void {
-    const dragObjectContext = this.dragObjectContext;
-    if (dragObjectContext && this.dropContainerContext) {
-      this.dropContainerContext
-        .dropEvent({
-          event: new DragAndDropServiceDragContainerDropEvent({
-            dragObjectData: dragObjectContext.data,
-            accepted: this.dropContainerContext
-              .predicate(dragObjectContext.data)
-          })
-        });
-    }
+  public overDropContainer(
+    dragAndDropContainerContext: DropContainerContext
+  ) {
+    this.dropContainerContext = dragAndDropContainerContext;
+  }
 
+  outDropContainer() {
     this.dropContainerContext = null;
   }
 
-  public OutDropContainer(): void {
-    if (this.dropContainerContext)
-    {
-      this.dropContainerContext
-        .outEvent({
-          event: new DragAndDropServiceDragContainerOutEvent()
-        })
-    }
-    this.dropContainerContext = null;
-  }
+  mouseup(event: MouseEvent): any {
+    if (this.dragObjectContext) {
+      let acceptableDrop = false;
+      let conatinerData:any = null;
 
-  public StarDraggingObject(option: {
-    dragObjectContext: DragAndDropServiceDragObjectContext
-  }): void {
-    this.dragObjectContext = option.dragObjectContext;
-  }
+      if (this.dropContainerContext) {
+        conatinerData = this.dropContainerContext.dropContainerData ;
+        acceptableDrop = this.dropContainerContext.predicate(this.dragObjectContext.dragObjectData)
+      }
 
-  public DropDragObject(): void {
-    if (!this.dragObjectContext) {
-      return;
-    }
-
-    let dropContainerData:any;
-    let acceptedDrop:boolean = false;
-    
-    if (this.dropContainerContext) {
-      dropContainerData = this.dropContainerContext.data;
-      acceptedDrop = this.dropContainerContext
-        .predicate(this.dropContainerContext);
-    }
-
-    this.dragObjectContext
-      .dropEvent({
-        event: new DragAndDropServiceDragObjectDropEvent({
-          dropContainerData: dropContainerData,
-          accepted: acceptedDrop
-        })});
-
-    this.dragObjectContext = null;
-  }
-
-  @HostListener('document:mousemove', ['$event'])
-  public mousemove(event: MouseEvent): void {
-    if (this.dragObjectContext != null)
-    {
-      this.dragObjectContext
-        .moveEvent({
-          event: new DragAndDropServiceDragObjectMoveEvent({
+      this.dragObjectContext.dropCallback(
+        new DragAndDropServiceDraggingDropEvent({
+          position: new DragAndDropPosition({
             offsetX: event.offsetX,
             offsetY: event.offsetY
-          })
-        })
+          }),
+          startingPosition: this.dragObjectContext.startingPosition,
+          acceptableDrop: acceptableDrop,
+          containerData: conatinerData
+        }))
     }
+    
+    this.dragObjectContext = null;
+    this.dropContainerContext = null;
   }
 
-  @HostListener('document:mouseup', ['$event'])
-  public mouseup() {
-    this.DropDragObject();
-    this.DropContainerDrop();
+  mousemove(event: MouseEvent) {
+    if (this.dragObjectContext) {
+      let acceptableDrop = false;
+      let conatinerData:any = null;
+
+      if (this.dropContainerContext) {
+        conatinerData = this.dropContainerContext.dropContainerData;
+        acceptableDrop = this.dropContainerContext.predicate(this.dragObjectContext.dragObjectData)
+
+        this.dropContainerContext.dragOverCallback(
+          new DragAndDropServiceDropContainerDragOverEvent({
+            acceptableDrop: acceptableDrop,
+            dragObjectData: this.dragObjectContext.dragObjectData
+          })
+        );
+      }
+      this.dragObjectContext.dragCallback(
+        new DragAndDropServiceDraggingDragEvent({
+          offsetX: event.offsetX,
+          offsetY: event.offsetY,
+          acceptableDrop: acceptableDrop,
+          containerData: conatinerData
+        }))
+    }
   }
 }
 

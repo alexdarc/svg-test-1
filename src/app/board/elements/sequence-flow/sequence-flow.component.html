@@ -28,7 +28,7 @@
     </svg>
     <svg:circle
       appDraggable
-      (draggableMove)="draging($event, 0)"
+      (draggableDrag)="draging($event, 0)"
       (draggableStart)="starDragging()"
       (draggableDrop)="endDraggingOutgoingPoint($event)"
       [draggableData]="sequenceFlow"
@@ -41,7 +41,7 @@
       let waypoint of intermediateWaypoints;
       let $index = index"
       appDraggable
-      (draggableMove)="draging($event, $index + 1)"
+      (draggableDrag)="draging($event, $index + 1)"
       (draggableStart)="starDragging()"
       (draggableDrop)="dummy()"
       [draggableData]="sequenceFlow"
@@ -52,7 +52,7 @@
 
     <svg:circle
       appDraggable
-      (draggableMove)="draging($event, sequenceFlow.waypoints.length - 1)"
+      (draggableDrag)="draging($event, sequenceFlow.waypoints.length - 1)"
       (draggableStart)="starDragging()"
       (draggableDrop)="endDragging($event, sequenceFlow.waypoints.length - 1)"
       [draggableData]="sequenceFlow"

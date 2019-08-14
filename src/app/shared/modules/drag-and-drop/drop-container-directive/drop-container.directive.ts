@@ -6,16 +6,15 @@ import {
   HostListener,
 } from '@angular/core';
 
+import { DropContainerOverEvent as OverEvent } from './model/drop-container-over-event';
+import { DropContainerDropEvent as DropEvent } from './model/drop-container-drop-event';
+import { DropContainerOutEvent as OutEvent } from './model/drop-container-out-event';
+
 import { DragAndDropService } from '../drag-and-drop-service/drag-and-drop.service';
 
-import { DropContainerOutEvent } from './model/drop-container-out-event';
-import { DropContainerOverEvent } from './model/drop-container-over-event';
-import { DropContainerDropEvent } from './model/drop-container-drop-event';
-
-import { DragAndDropServiceDropContainerContext } from '../drag-and-drop-service/model/drag-and-drop-service-drop-container-context';
-import { DragAndDropServiceDragContainerDropEvent } from '../drag-and-drop-service/model/drag-and-drop-service-drag-container-drop-event';
-import { DragAndDropServiceDragContainerDragOverEvent } from '../drag-and-drop-service/model/drag-and-drop-service-drag-container-drag-over-event';
-import { DragAndDropServiceDragContainerOutEvent } from '../drag-and-drop-service/model/drag-and-drop-service-drag-container-out-event';
+import { DragAndDropServiceDropContainerDropEvent as DragAndDropServiceDropEvent } from '../drag-and-drop-service/model/drag-and-drop-service-drop-container-drop-event';
+import { DragAndDropServiceDropContainerDragOverEvent as DragAndDropServiceDragOverEvent} from '../drag-and-drop-service/model/drag-and-drop-service-drop-container-drag-object-over-container-event';
+import { DragAndDropServiceDragAndDropContainerContext as DragAndDropContainerContext} from '../drag-and-drop-service/model/drag-and-drop-service-drop-conatiner-context';
 
 @Directive({
   selector: '[appDropContainer]'
@@ -26,13 +25,13 @@ export class DropContainerDirective {
   ) {}
 
   @Output('dropContainerOver')
-  over: EventEmitter<DropContainerOverEvent> = new EventEmitter<DropContainerOverEvent>();
+  over: EventEmitter<OverEvent> = new EventEmitter<OverEvent>();
 
   @Output('dropContainerOut')
-  out: EventEmitter<DropContainerOutEvent> = new EventEmitter<DropContainerOutEvent>();
+  out: EventEmitter<OutEvent> = new EventEmitter<OutEvent>();
 
   @Output('dropContainerDrop')
-  drop: EventEmitter<DropContainerDropEvent> = new EventEmitter<DropContainerDropEvent>();
+  drop: EventEmitter<DropEvent> = new EventEmitter<DropEvent>();
 
   @Input('dropContainerData')
   data: any;
@@ -43,41 +42,36 @@ export class DropContainerDirective {
   @HostListener('mouseover')
   mouseover() {
     this.dragAndDropService
-      .OverDropContainer({
-        dropContainerContext: new DragAndDropServiceDropContainerContext({
-          predicate: this.predicate,
-          data: this.data,
-          dropEvent: (option: {
-            event: DragAndDropServiceDragContainerDropEvent
-          }) => {
-            this.drop
-              .emit(new DropContainerDropEvent({
-                acceptedDrop: option.event.accepted,
-                dragObjectData: option.event.dragObjectData
-              }));
-          },
-          dragOverEvent: (option: {
-            event: DragAndDropServiceDragContainerDragOverEvent
-          }) => {
-            this.over
-              .emit(new DropContainerOverEvent({
-                accepted: option.event.accepted,
-                dragObjectData: option.event.dragObjectData
-              }));
-          },
-          outEvent: (option: {
-            event: DragAndDropServiceDragContainerOutEvent
-          }) => {
-            this.out
-              .emit(
-                new DropContainerOutEvent());
-          }
-        })});
+      .overDropContainer(new DragAndDropContainerContext({
+        data: this.data,
+        predicate: this.predicate,
+        dropCallback: (event: DragAndDropServiceDropEvent) => {
+          this.dropHandler(event)
+        },
+        dragOverCallback: (event: DragAndDropServiceDragOverEvent) => { 
+          this.dragOverHandler(event)
+        },
+      }));
   }
 
   @HostListener('mouseout')
   mouseout() {
-    this.dragAndDropService
-      .OutDropContainer();
+    this.dragAndDropService.outDropContainer();
+    this.out.emit(new OutEvent());
+  }
+
+  private dragOverHandler(
+    event: DragAndDropServiceDragOverEvent) {
+      this.over.emit(new OverEvent({
+        acceptableDrop: event.acceptableDrop,
+        dragObjectData: event.dragObjectData
+      }))
+  }
+
+  private dropHandler(event: DragAndDropServiceDropEvent) {
+    this.drop.emit(new DropEvent({
+      acceptableDrop: event.acceptableDrop,
+      dragObjectData: event.dragObjectData
+    }))
   }
 }
