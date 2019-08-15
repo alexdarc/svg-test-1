@@ -1,5 +1,5 @@
 import { DragAndDropServiceDraggingDropEvent as DropEvent } from './drag-and-drop-service-dragging-drop-event';
-import { DragAndDropServiceDraggingDragEvent as DragEvent } from './drag-and-drop-service-dragging-dragging-event';
+import { DragAndDropServiceDraggingDragEvent as DragEvent } from './drag-and-drop-service-dragging-drag-event';
 import { DragAndDropPosition as Position } from '../../drag-and-drop-positon';
 
 export class DragAndDropServiceDropObjectContext {

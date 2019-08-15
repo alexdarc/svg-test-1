@@ -12,7 +12,7 @@ import { DraggableDropEvent as DropEvent } from './model/draggable-drop-event';
 
 import { DragAndDropService } from '../drag-and-drop-service/drag-and-drop.service';
 import { DragAndDropServiceDraggingDropEvent as DragAndDropServiceDropEvent } from '../drag-and-drop-service/model/drag-and-drop-service-dragging-drop-event';
-import { DragAndDropServiceDraggingDragEvent as DragAndDropServiceDragEvent } from '../drag-and-drop-service/model/drag-and-drop-service-dragging-dragging-event';
+import { DragAndDropServiceDraggingDragEvent as DragAndDropServiceDragEvent } from '../drag-and-drop-service/model/drag-and-drop-service-dragging-drag-event';
 import { DragAndDropServiceDropObjectContext as DropObjectContext } from '../drag-and-drop-service/model/drag-and-drop-service-drop-object-context';
 
 @Directive({

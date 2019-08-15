@@ -3,7 +3,7 @@ import { DragAndDropServiceDragAndDropContainerContext as DropContainerContext} 
 import { DragAndDropServiceDropObjectContext as DragObjectContext} from './model/drag-and-drop-service-drop-object-context';
 import { DragAndDropServiceDraggingDropEvent } from './model/drag-and-drop-service-dragging-drop-event';
 import { DragAndDropPosition } from '../drag-and-drop-positon';
-import { DragAndDropServiceDraggingDragEvent } from './model/drag-and-drop-service-dragging-dragging-event';
+import { DragAndDropServiceDraggingDragEvent } from './model/drag-and-drop-service-dragging-drag-event';
 import { DragAndDropServiceDropContainerDragOverEvent } from './model/drag-and-drop-service-drop-container-drag-object-over-container-event';
 
 @Injectable()
