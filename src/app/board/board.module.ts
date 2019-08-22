@@ -11,6 +11,8 @@ import { SequenceFlowComponent } from './elements/sequence-flow/sequence-flow.co
 import { CoordsPipe } from './shared/pipes/coords.pipe';
 import { WaypointsPipe } from './shared/pipes/waypoints.pipe';
 import { DragAndDropModule } from './../shared/modules/drag-and-drop/drag-and-drop.module';
+import {DependencyContainer} from "../DependencyContainer";
+import {FlowNodeComponent} from "./elements/flow-node/flow-node.component";
 
 @NgModule({
   declarations: [
@@ -23,11 +25,13 @@ import { DragAndDropModule } from './../shared/modules/drag-and-drop/drag-and-dr
     SequenceFlowComponent,
     CoordsPipe,
     WaypointsPipe,
+    FlowNodeComponent
   ],
   imports: [
     CommonModule,
     DragAndDropModule,
   ],
   exports: [BoardComponent],
+  providers: [DependencyContainer],
 })
 export class BoardModule { }

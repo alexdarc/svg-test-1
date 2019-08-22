@@ -6,11 +6,14 @@ import {
   HostListener,
 } from '@angular/core';
 
+import { DraggableStartEvent as StartEvent} from '../../drag-and-drop/draggable-directive/model/draggable-start-event';
+import { DraggableDragEvent as DragEvent } from './model/draggable-drag-event';
+import { DraggableDropEvent as DropEvent } from './model/draggable-drop-event';
+
 import { DragAndDropService } from '../drag-and-drop-service/drag-and-drop.service';
-import { DraggablePosition } from './model/draggable-position';
-import { DraggableMoveEvent } from './model/draggable-move-event';
-import { DraggableStartEvent } from './model/draggable-start-event';
-import { DraggableDropEvent } from './model/draggable-drop-event';
+import { DragAndDropServiceDraggingDropEvent as DragAndDropServiceDropEvent } from '../drag-and-drop-service/model/drag-and-drop-service-dragging-drop-event';
+import { DragAndDropServiceDraggingDragEvent as DragAndDropServiceDragEvent } from '../drag-and-drop-service/model/drag-and-drop-service-dragging-drag-event';
+import { DragAndDropServiceDropObjectContext as DropObjectContext } from '../drag-and-drop-service/model/drag-and-drop-service-drop-object-context';
 
 @Directive({
   selector: '[appDraggable]'
@@ -21,64 +24,51 @@ export class DraggableDirective {
     private dragAndDropService: DragAndDropService
   ) { }
 
-  private selected: boolean;
-  private startingPosotion: DraggablePosition;
-
-  // tslint:disable-next-line: no-input-rename
   @Input('draggableData')
   data: any;
 
-  // tslint:disable-next-line: no-output-rename
-  @Output('draggableMove')
-  move: EventEmitter<DraggableMoveEvent> = new EventEmitter<DraggableMoveEvent>();
+  @Output('draggableDrag')
+  drag: EventEmitter<DragEvent> = new EventEmitter<DragEvent>();
 
-  // tslint:disable-next-line: no-output-rename
   @Output('draggableStart')
-  start: EventEmitter<DraggableStartEvent> = new EventEmitter<DraggableStartEvent>();
+  start: EventEmitter<StartEvent> = new EventEmitter<StartEvent>();
 
-  // tslint:disable-next-line: no-output-rename
   @Output('draggableDrop')
-  drop: EventEmitter<DraggableDropEvent> = new EventEmitter<DraggableDropEvent>();
-
-  @HostListener('document:mousemove', ['$event'])
-  mousemove(event: MouseEvent) {
-    if (this.selected) {
-      this.move
-        .emit(new DraggableMoveEvent({
-          offsetX: event.offsetX,
-          offsetY: event.offsetY
-        }));
-    }
-  }
-
-  @HostListener('document:mouseup', ['$event'])
-  mouseup() {
-    if (this.selected) {
-      this.selected = false;
-      const acceptedDrop = this.dragAndDropService
-        .DropDragObject();
-
-      this.drop
-        .emit(new DraggableDropEvent({
-          startingPosition: this.startingPosotion,
-          acceptedDrop
-        }));
-    }
-  }
+  drop: EventEmitter<DropEvent> = new EventEmitter<DropEvent>();
 
   @HostListener('mousedown', ['$event'])
-  mousedown(event: MouseEvent) {
-    this.selected = true;
+  mousedown(mouseEvent: MouseEvent) {
     this.dragAndDropService
-      .StarDraggingObject({
-        dragObjectData: this.data
-      });
+      .startDragging(new DropObjectContext({
+        dragObjectData: this.data,
+        startingPosition: {
+          offsetX: mouseEvent.offsetX,
+          offsetY: mouseEvent.offsetY
+        },
+        dropCallback: (event: DragAndDropServiceDropEvent) => {
+          this.dropHandler(event);
+        },
+        dragCallback: (event: DragAndDropServiceDragEvent) => {
+          this.dragHandler(event)
+        }
+      }));
 
-    this.startingPosotion = new DraggablePosition({
+    this.start.emit(new StartEvent());
+  }
+
+  private dropHandler(event: DragAndDropServiceDropEvent): void {
+    this.drop.emit(new DropEvent({
+      acceptableDrop: event.acceptableDrop,
+      containerData: event.containerData,
+      position: event.position,
+      startingPosition: event.startingPosition
+    }));
+  }
+
+  private dragHandler(event: DragAndDropServiceDragEvent): void {
+    this.drag.emit(new DragEvent({
       offsetX: event.offsetX,
       offsetY: event.offsetY
-    });
-    this.start
-      .emit(new DraggableStartEvent());
+    }));
   }
 }

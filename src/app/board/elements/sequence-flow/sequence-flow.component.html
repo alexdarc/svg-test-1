@@ -14,27 +14,52 @@
   <g
     [style.pointer-events]="inDragging ? 'none' : 'all'">
     <svg *ngFor="
-          let waypoint of context.waypoints;
+          let waypoint of sequenceFlow.waypoints;
           let $index = index;
           let $last = last;
           let $first = first">
       <line *ngIf="!$first"
-        attr.x1="{{context.waypoints[$index - 1].x}}"
-        attr.y1="{{context.waypoints[$index - 1].y}}"
+        attr.x1="{{sequenceFlow.waypoints[$index - 1].x}}"
+        attr.y1="{{sequenceFlow.waypoints[$index - 1].y}}"
         attr.x2="{{waypoint.x}}"
         attr.y2="{{waypoint.y}}"
         class="line"
         [attr.marker-end]="$last ? 'url(\'#flow-end\')' : ''" />
     </svg>
-    <svg:circle *ngFor="let waypoint of context.waypoints; let $index = index"
+    <svg:circle
       appDraggable
-      (draggableMove)="draging($event, $index)"
+      (draggableDrag)="draging($event, 0)"
       (draggableStart)="starDragging()"
-      (draggableDrop)="endDragging($event, $index)"
-      [draggableData]="context"
+      (draggableDrop)="endDraggingOutgoingPoint($event)"
+      [draggableData]="sequenceFlow"
+      attr.cx="{{startWaypoint.x}}"
+      attr.cy="{{startWaypoint.y}}"
+      r="5">
+    </svg:circle>
+
+    <svg:circle *ngFor="
+      let waypoint of intermediateWaypoints;
+      let $index = index"
+      appDraggable
+      (draggableDrag)="draging($event, $index + 1)"
+      (draggableStart)="starDragging()"
+      (draggableDrop)="dummy()"
+      [draggableData]="sequenceFlow"
       attr.cx="{{waypoint.x}}"
       attr.cy="{{waypoint.y}}"
       r="5">
     </svg:circle>
+
+    <svg:circle
+      appDraggable
+      (draggableDrag)="draging($event, sequenceFlow.waypoints.length - 1)"
+      (draggableStart)="starDragging()"
+      (draggableDrop)="endDragging($event, sequenceFlow.waypoints.length - 1)"
+      [draggableData]="sequenceFlow"
+      attr.cx="{{endWaypoint.x}}"
+      attr.cy="{{endWaypoint.y}}"
+      r="5">
+    </svg:circle>
+
   </g>
 </svg>

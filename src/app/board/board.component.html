@@ -2,14 +2,12 @@
   class="board"
   (dblclick)="onAdd($event)"
 >
-  <g
-    app-event-element
+  <svg
+    app-flow-node
     *ngFor="let flowElement of flowNodes"
-    [flowElement]="flowElement"
-    appDropContainer
-    [dropContainerPredicate]="flowNodeDropPredicate"
+    [flowNodeContext]="flowElement"
   >
-  </g>
+  </svg>
 
   <svg
     app-sequence-flow

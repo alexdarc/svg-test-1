@@ -1,10 +1,9 @@
-export class DropContainerDropEvent {
-  
-  public dragObjectData: any;
-  public acceptableDrop: boolean;
+export class DropContainerOverEvent {
+  public readonly acceptableDrop: boolean;
+  public readonly dragObjectData: any;
 
   constructor(option: {
-    acceptableDrop: boolean
+    acceptableDrop: boolean,
     dragObjectData: any
   }) {
     this.acceptableDrop = option.acceptableDrop;

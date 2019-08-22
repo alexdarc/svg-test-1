@@ -17,6 +17,14 @@ import { EndEvent } from './end-event.model';
       fill: white;
       fill-opacity: 0.95;
     }
+    
+    :host-context(.is-ok) circle {
+      fill: green;
+    }
+    
+    :host-context(.is-not-ok) circle {
+      fill: red;
+    }
   `],
 })
 export class EndComponent implements OnInit, IProcessComponent {
