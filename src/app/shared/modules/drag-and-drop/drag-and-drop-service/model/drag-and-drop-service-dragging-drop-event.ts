@@ -1,6 +1,6 @@
 import { DragAndDropPosition } from '../../drag-and-drop-positon';
 
-export class DraggableDropEvent {
+export class DragAndDropServiceDraggingDropEvent {
   public readonly acceptableDrop: boolean;
   public readonly containerData: any
   public readonly position: DragAndDropPosition;
